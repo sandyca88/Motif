@@ -1,0 +1,6 @@
+[build]
+  command = "python3 motif-pack/build/bundle.py && python3 motif-pack/build/package_site.py"
+  publish = "motif-site"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"

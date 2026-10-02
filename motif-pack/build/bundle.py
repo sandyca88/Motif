@@ -13,6 +13,7 @@ def zipdir(src, out, arc):
                 if f.startswith('.'): continue
                 p = os.path.join(r, f); z.write(p, os.path.join(arc, os.path.relpath(p, src)))
 
+os.makedirs(DIST, exist_ok=True)
 skills = sorted(d for d in os.listdir(SK) if os.path.isfile(os.path.join(SK, d, 'SKILL.md')))
 for s in skills:
     shutil.copy(LIC, os.path.join(SK, s, 'LICENSE.txt'))
