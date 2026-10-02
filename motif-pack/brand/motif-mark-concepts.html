@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motif mark — animated logo concepts</title>
+<style>
+:root{--ink:#f5f5f7;--mut:#8e8e96;--bg:#0b0b0c;--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;padding:48px 6vw 80px}
+h1{font-size:44px;letter-spacing:-.04em}h1+p{color:var(--mut);margin:10px 0 40px;font-size:18px;max-width:720px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.c{background:#141416;border:1px solid var(--line);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:18px;min-height:460px}
+.c h2{font-size:22px;letter-spacing:-.02em}.c .tag{font:600 11px ui-monospace,Menlo,monospace;letter-spacing:.14em;color:#a78bfa}.c p{color:var(--mut);line-height:1.5;font-size:15px}
+.stage{flex:1;display:grid;place-items:center;border-radius:18px;background:radial-gradient(circle at 50% 30%,rgba(139,92,246,.18),transparent 60%),#0f0f12;border:1px solid var(--line);min-height:220px;position:relative;overflow:hidden}
+.rec{border-color:rgba(167,139,250,.6);box-shadow:0 30px 80px -40px rgba(139,92,246,.6)}
+.rec .badge{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 9px;border-radius:99px;background:linear-gradient(90deg,#8b5cf6,#f472b6)}
+
+/* ---------- the Motif mark ---------- */
+.mark{--s:120px;position:relative;width:var(--s);height:var(--s);border-radius:31%;
+  background:conic-gradient(from 210deg,#8b5cf6,#22d3ee,#f472b6,#8b5cf6);
+  box-shadow:inset 0 calc(var(--s)*-.06) calc(var(--s)*.14) rgba(0,0,0,.25),inset 0 calc(var(--s)*.05) calc(var(--s)*.1) rgba(255,255,255,.35),0 calc(var(--s)*.12) calc(var(--s)*.3) rgba(139,92,246,.35);
+  animation:breathe 4s ease-in-out infinite}
+.mark::after{content:"";position:absolute;left:14%;top:9%;width:42%;height:22%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,0));filter:blur(calc(var(--s)*.01))}
+.eye{position:absolute;top:36%;width:18%;height:24%;border-radius:50%;background:#fff;overflow:hidden;transition:height .08s}
+.eye.l{left:27%}.eye.r{left:55%}
+.pupil{position:absolute;left:50%;top:50%;width:62%;height:52%;border-radius:50%;background:#0b0b10;transform:translate(-50%,-50%)}
+.pupil::after{content:"";position:absolute;left:18%;top:14%;width:34%;height:34%;border-radius:50%;background:#fff}
+.mark.blink .eye{height:3%;top:47%}
+@keyframes breathe{50%{transform:scale(1.03) translateY(-2px)}}
+.mark:hover{animation:squish .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes squish{30%{transform:scale(1.12,.88)}60%{transform:scale(.94,1.06)}100%{transform:none}}
+
+/* inline headline demo */
+.inline{font-size:34px;font-weight:700;letter-spacing:-.04em;display:flex;align-items:center;gap:.25em;white-space:nowrap}
+.inline .mark{--s:1.05em;animation:none}
+
+/* concept B: morph */
+.morph{--s:120px;animation:morph 6s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes morph{0%,20%{border-radius:31%}33%,53%{border-radius:50%}66%,86%{border-radius:50% 50% 28% 28%/60% 60% 40% 40%}100%{border-radius:31%}}
+.mlabel{position:absolute;bottom:14px;font:600 12px ui-monospace,Menlo,monospace;color:var(--mut);letter-spacing:.1em}
+
+/* concept C: family */
+.fam{display:flex;gap:18px;align-items:flex-end}
+.fam .mark{--s:64px}
+.fam .m1{background:radial-gradient(circle at 35% 30%,#7df0ff,#06b6d4);border-radius:50%;animation-delay:-.4s}
+.fam .m2{animation-delay:-1.2s}
+.fam .m3{background:radial-gradient(circle at 35% 30%,#ff9fd0,#ec4899);border-radius:50% 50% 30% 30%/62% 62% 38% 38%;animation-delay:-2s}
+.fam .m4{background:radial-gradient(circle at 35% 30%,#86efac,#10b981);border-radius:99px;--s:64px;width:92px;animation-delay:-2.8s}
+.fam .m4 .eye.l{left:30%}.fam .m4 .eye.r{left:53%}
+.fam span{display:block;text-align:center;font:600 11px ui-monospace,Menlo,monospace;color:var(--mut);margin-top:10px;letter-spacing:.08em}
+.fam .mark{animation:hop 2.4s ease-in-out infinite}
+@keyframes hop{0%,60%,100%{transform:none}70%{transform:translateY(-10px) scale(1.04,.96)}80%{transform:translateY(0) scale(1.06,.94)}}
+.typing{display:flex;gap:4px;position:absolute;top:18px;right:18px;padding:8px 10px;border-radius:12px;background:#1d1d22}
+.typing i{width:6px;height:6px;border-radius:50%;background:#a1a1aa;animation:dot 1.2s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{30%{transform:translateY(-4px);background:#fff}}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<h1>Motif mark: animated logo concepts</h1>
+<p>Same gradient squircle you already use, turned into a character. Move your cursor: every mark looks at you, blinks, and squishes on hover. Use it in the nav, inline in headlines, as the favicon, and as the "agent is thinking" indicator.</p>
+<div class="grid">
+  <div class="c rec"><span class="badge">RECOMMENDED</span><span class="tag">A · GLANCE</span><h2>The curious mark</h2>
+    <div class="stage"><div class="mark js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div></div>
+    <div class="inline">Meet <span class="mark js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></span> Motif</div>
+    <p>Eyes follow the cursor, random blink every 3–6 s, gentle breathing, squish on hover. Works at 16px (favicon) up to hero size.</p></div>
+  <div class="c"><span class="tag">B · MORPH</span><h2>One mark, three products</h2>
+    <div class="stage"><div class="mark morph js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div><span class="mlabel" id="ml">SKILLS</span></div>
+    <p>The mark morphs squircle → circle → drop as it cycles Skills, Prompts and Decks. Great for the hero or loading states; tells the story of the three libraries.</p></div>
+  <div class="c"><span class="tag">C · FAMILY</span><h2>A crew of teammates</h2>
+    <div class="stage"><div class="typing"><i></i><i></i><i></i></div><div class="fam">
+      <div><div class="mark m1 js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div><span>PROMPTS</span></div>
+      <div><div class="mark m2 js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div><span>SKILLS</span></div>
+      <div><div class="mark m3 js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div><span>DECKS</span></div>
+      <div><div class="mark m4 js"><i class="eye l"><b class="pupil"></b></i><i class="eye r"><b class="pupil"></b></i></div><span>FREE</span></div></div></div>
+    <p>Each library gets its own shape and color with the same eyes, used as category icons and avatars, and they hop in turn.</p></div>
+</div>
+<script>
+const marks=[...document.querySelectorAll('.mark.js')];let P=null,last=0;
+addEventListener('pointermove',e=>{P={x:e.clientX,y:e.clientY};last=performance.now()},{passive:true});
+function loop(t){const idle=!P||t-last>3500;
+  marks.forEach((m,i)=>{const r=m.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height*.48;
+    let dx,dy;if(idle){dx=Math.cos(t/1400+i)*60;dy=Math.sin(t/1100+i)*30}else{dx=P.x-cx;dy=P.y-cy}
+    const d=Math.hypot(dx,dy)||1,k=Math.min(1,d/180);
+    m.querySelectorAll('.pupil').forEach(p=>{p.style.transform=`translate(calc(-50% + ${dx/d*k*28}%),calc(-50% + ${dy/d*k*30}%))`})});
+  requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+function blink(m){m.classList.add('blink');setTimeout(()=>m.classList.remove('blink'),120)}
+marks.forEach(m=>{(function b(){setTimeout(()=>{blink(m);b()},3000+Math.random()*3000)})()});
+const L=['SKILLS','PROMPTS','DECKS'];let li=0;setInterval(()=>{li=(li+1)%3;document.getElementById('ml').textContent=L[li]},2000);
+</script>
+</body>
+</html>

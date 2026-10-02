@@ -1,0 +1,9 @@
+Motif Skill License (v1)
+
+Copyright (c) 2026 Motif. All rights reserved.
+
+You may install and use this skill for your own personal or internal business work, including to create commercial output for yourself or clients.
+You may not resell, sublicense, publish, share or redistribute this skill package or its contents, in whole or in part.
+Free skills may be shared by linking to the official Motif page, but not re-hosted.
+
+THE SKILL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

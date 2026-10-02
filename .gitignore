@@ -1,0 +1,16 @@
+# build output (recreate with the build scripts)
+motif-pack/dist/
+motif-site/
+motif-site.zip
+motif-storefront.html
+*.zip
+# private business data: never commit
+Motif Ops/
+motif-pack/ops/
+*.xlsx
+# previews / junk
+zz-*.html
+*-preview.html
+*.tmp
+__pycache__/
+.DS_Store

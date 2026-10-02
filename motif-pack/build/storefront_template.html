@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motif: UX-grade Agent Skills, Decks & AI Website Prompts</title>
+<link rel="icon" type="image/png" sizes="32x32" href="motif-mark-32.png">
+<link rel="apple-touch-icon" href="motif-mark-180.png">
+<meta property="og:image" content="motif-og.png">
+<script>try{var _t=localStorage.getItem("motif-theme");document.documentElement.dataset.theme=(_t==="light"||_t==="dark")?_t:"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+<style>
+:root{--bg:#0b0b0c;--card:#141416;--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16);--tx:#f5f5f7;--mut:#8e8e96;--a1:#8b5cf6;--a2:#22d3ee;--a3:#f472b6;--ok:#34d399;--font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--surf:#101012;--surf2:#232327;--tx2:#cfcfd6;--inv:#fff;--invtx:#000;--hover:rgba(255,255,255,.06);--navbg:rgba(11,11,12,.75)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px}
+.demo{background:repeating-linear-gradient(45deg,#2a1f00,#2a1f00 10px,#241b00 10px,#241b00 20px);color:#ffd66b;text-align:center;font-size:13px;padding:7px;border-bottom:1px solid rgba(255,214,107,.25)}
+/* nav */
+nav{position:sticky;top:0;z-index:40;background:var(--navbg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:700;font-size:19px;letter-spacing:-.02em}
+.logo .mk{--s:30px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.links{display:flex;gap:4px;font-size:15px}.links a{padding:8px 12px;border-radius:99px;color:var(--mut)}.links a:hover{color:var(--tx)}.links a.on{color:var(--tx);background:var(--surf2)}
+.links small{font-size:11px;color:var(--mut);margin-left:4px}
+.right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:99px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn.w{background:var(--inv);color:var(--invtx)}.btn.w:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(139,92,246,.45)}
+.btn.g{border:1px solid var(--line2)}.btn.g:hover{background:var(--hover)}
+.btn.sm{padding:8px 14px;font-size:14px}
+.user{display:flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;border:1px solid var(--line2);border-radius:99px;font-size:14px}
+.user i{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f7b32b,#f2613f);display:grid;place-items:center;font-style:normal;font-weight:700;color:#fff}
+.pro{font-size:10px;font-weight:800;letter-spacing:.06em;padding:3px 7px;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a3));color:#fff}
+.gbtn{display:inline-flex;gap:10px;align-items:center;padding:9px 16px;border-radius:99px;background:#fff;color:#1f1f1f;font-weight:600;font-size:14px}
+/* hero */
+.hero{text-align:center;padding:88px 0 40px;position:relative}
+.hero::before{content:"";position:absolute;left:50%;top:-120px;width:1100px;height:600px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(139,92,246,.22),transparent);pointer-events:none}
+.drop{display:inline-flex;gap:8px;align-items:center;padding:7px 15px;border:1px solid var(--line2);border-radius:99px;font-size:14px;color:var(--tx2);position:relative}
+.drop i{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+h1{position:relative;font-size:clamp(44px,7vw,100px);letter-spacing:-.05em;line-height:.98;font-weight:700;margin:24px auto 20px;max-width:1000px}
+h1 em{font-family:var(--serif);font-weight:400;letter-spacing:-.02em}
+.rot{display:inline-block;position:relative;height:1.06em;vertical-align:bottom;overflow:hidden;transition:width .7s cubic-bezier(.2,.8,.2,1);text-align:left}
+.rot span{position:absolute;left:0;top:0;white-space:nowrap;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent;transform:translateY(110%);opacity:0;filter:blur(8px);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.rot span.on{transform:none;opacity:1;filter:none}.rot span.out{transform:translateY(-110%);opacity:0}
+.sub{position:relative;font-size:19px;color:var(--mut);max-width:640px;margin:0 auto 30px;line-height:1.55}
+.stats{display:flex;gap:40px;justify-content:center;margin-top:34px;color:var(--mut);font-size:15px}.stats b{display:block;color:var(--tx);font-size:30px;letter-spacing:-.03em}
+/* category tiles */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:30px 0 10px}
+.cat{padding:22px;border-radius:22px;border:1px solid var(--line);background:var(--card);transition:all .3s;position:relative;overflow:hidden}
+.cat:hover{border-color:var(--line2);transform:translateY(-4px)}
+.cat b{font-size:22px;letter-spacing:-.02em;display:block}.cat span{color:var(--mut);font-size:14px}.cat .n{position:absolute;right:20px;top:18px;font-size:13px;color:var(--mut)}
+.cat::after{content:"";position:absolute;right:-40px;bottom:-40px;width:140px;height:140px;border-radius:50%;filter:blur(30px);opacity:.5;background:var(--c)}
+/* section head */
+.sh{display:flex;justify-content:space-between;align-items:end;margin:56px 0 20px;gap:16px;flex-wrap:wrap}
+.sh h2{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.035em}.sh h2 em{font-family:var(--serif);font-weight:400}
+.sh a{color:var(--mut);font-size:15px}.sh a:hover{color:var(--tx)}
+.eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--a2);margin-bottom:8px}
+/* library page header */
+.ph{padding:56px 0 8px}.ph h1{text-align:left;margin:0 0 10px;font-size:clamp(40px,5vw,68px)}.ph p{color:var(--mut);font-size:18px;max-width:640px}
+/* toolbar */
+.bar{position:sticky;top:68px;z-index:30;padding:16px 0;background:linear-gradient(var(--bg) 75%,transparent)}
+.tb{display:flex;gap:12px;align-items:center}
+.tabs{flex:1;display:flex;gap:4px;padding:6px;border:1px solid var(--line);border-radius:99px;background:var(--surf);overflow-x:auto;scrollbar-width:none;position:relative}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{position:relative;z-index:1;padding:10px 20px;border-radius:99px;font-size:16px;font-weight:500;color:#b4b4bc;white-space:nowrap;text-transform:capitalize}
+.tabs button:hover,.tabs button.on{color:var(--tx)}
+.ink{position:absolute;top:6px;height:calc(100% - 12px);border-radius:99px;background:var(--ink,#2a2a2e);border:1px solid var(--line2);transition:all .45s cubic-bezier(.2,.8,.2,1)}
+.srch{display:flex;align-items:center;gap:8px;padding:0 16px;height:54px;border:1px solid var(--line);border-radius:99px;background:var(--surf);width:260px}
+.srch input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--tx);font-size:15px}
+select.sort{height:54px;border-radius:99px;border:1px solid var(--line);background:var(--surf);color:var(--tx);padding:0 18px;font:inherit;font-size:15px}
+.count{color:var(--mut);font-size:14px;margin:6px 4px 0}
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 32px;padding:14px 0 30px}
+.grid.three{grid-template-columns:repeat(3,1fr);gap:30px 24px}
+.item{cursor:pointer;display:block}
+.thumb{position:relative;aspect-ratio:16/10;border-radius:26px;overflow:hidden;background:var(--surf);border:1px solid var(--line);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s,border-color .3s}
+.thumb iframe{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;transform-origin:0 0;pointer-events:none}
+.item:hover .thumb{transform:translateY(-6px);border-color:var(--line2);box-shadow:0 40px 80px -30px rgba(139,92,246,.45)}
+.ov{position:absolute;inset:0;display:grid;place-items:center;transition:background .3s}
+.ov span{padding:11px 20px;border-radius:99px;background:var(--inv);color:var(--invtx);font-weight:600;font-size:15px;opacity:0;transform:translateY(10px) scale(.96);transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.item:hover .ov{background:rgba(0,0,0,.18)}.item:hover .ov span{opacity:1;transform:none}
+.lockc{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:grid;place-items:center;border:1px solid var(--line2)}
+.info{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 6px 0;gap:12px}
+.info h3{font-size:26px;letter-spacing:-.03em;font-weight:700;line-height:1.2}
+.three .info h3{font-size:21px}
+.info p{font-size:17px;color:var(--mut);margin-top:3px}.three .info p{font-size:15px}
+.bdg{display:inline-block;vertical-align:middle;margin-left:8px;font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:99px}
+.b-free{background:rgba(52,211,153,.14);color:#34d399;border:1px solid rgba(52,211,153,.3)}
+.b-new{background:rgba(34,211,238,.12);color:#67e8f9;border:1px solid rgba(34,211,238,.3)}
+.ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#a8a8b0;flex:none}.ic:hover{background:var(--hover);color:var(--tx)}
+.more{display:flex;justify-content:center;margin:10px 0 40px}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:70px 0;font-size:18px}
+/* item page */
+.back{display:inline-flex;gap:6px;color:var(--mut);margin:32px 0 18px;font-size:15px}.back:hover{color:var(--tx)}
+.detail{display:grid;grid-template-columns:1.6fr 1fr;gap:36px;align-items:start}
+.detail .thumb{border-radius:28px}
+.side{position:sticky;top:90px;display:flex;flex-direction:column;gap:16px}
+.side h1{text-align:left;font-size:44px;margin:0}.side .c{color:var(--mut);font-size:17px}.side .d{color:var(--tx2);line-height:1.6;font-size:16px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tags span{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--line2);color:var(--tx2);text-transform:capitalize}
+pre{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.6;white-space:pre-wrap;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px;max-height:360px;overflow:auto;color:var(--tx2)}
+.lock{position:relative}.lock pre{max-height:170px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 15%,transparent 95%);mask-image:linear-gradient(#000 15%,transparent 95%);filter:blur(1.5px);user-select:none}
+.lock .ul{position:absolute;left:0;right:0;bottom:4px;text-align:center}
+.works{font-size:13px;color:var(--mut)}
+.inc{border:1px solid var(--line);border-radius:16px;padding:16px;font-size:14px;color:var(--tx2);line-height:1.8}
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+.plan{padding:30px;border-radius:24px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;position:relative}
+.plan.hot{border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--a1),var(--a2),var(--a3)) border-box;transform:translateY(-10px);box-shadow:0 30px 80px -30px rgba(139,92,246,.5)}
+.plan .rb{position:absolute;top:-12px;left:30px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a3))}
+.plan .amt{font-size:50px;font-weight:700;letter-spacing:-.045em;margin:12px 0 4px}.plan .amt small{font-size:16px;color:var(--mut);font-weight:400}
+.plan ul{list-style:none;display:grid;gap:10px;margin:22px 0 26px;color:var(--tx2);font-size:15px;flex:1}.plan li::before{content:"✓  ";color:var(--ok)}
+.pay{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px;color:var(--mut);font-size:13px}.pay span{padding:6px 12px;border:1px solid var(--line);border-radius:8px}
+.tip{margin-top:40px;padding:26px;border-radius:22px;border:1px dashed var(--line2);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.glassf{display:grid;gap:16px;padding:30px;border:1px solid var(--line);border-radius:24px;background:var(--card);margin-top:24px;position:relative}.glassf label{display:grid;gap:8px;font-size:14px;font-weight:600}
+.glassf input,.glassf select,.glassf textarea{font:inherit;font-weight:400;font-size:15px;color:var(--tx);background:var(--surf);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;outline:0}.glassf input:focus,.glassf select:focus,.glassf textarea:focus{border-color:var(--a1);box-shadow:0 0 0 3px rgba(139,92,246,.25)}
+details{border-bottom:1px solid var(--line);padding:18px 0}summary{cursor:pointer;list-style:none;font-size:17px;font-weight:600;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--mut);font-size:22px}details[open] summary::after{content:"−"}details p{color:var(--mut);margin-top:10px;line-height:1.6}
+/* free picks */
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pk{padding:18px;border-radius:18px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--mut)}
+.pk:hover{border-color:var(--line2)}.pk b{color:var(--tx);font-size:16px}.pk em{font-style:normal;font-size:11px;font-weight:700;color:var(--tx2);border:1px solid var(--line2);border-radius:99px;padding:2px 8px;width:max-content}
+/* modal */
+.md{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px)}
+.md.open{display:flex}
+.box{width:min(440px,100%);background:var(--surf);border:1px solid var(--line2);border-radius:24px;padding:30px;text-align:center}
+.box h3{font-size:24px;letter-spacing:-.02em;margin:10px 0 6px}.box p{color:var(--mut);font-size:15px;line-height:1.5}
+footer{border-top:1px solid var(--line);padding:56px 0 30px;color:var(--mut);font-size:14px;margin-top:80px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}.fgrid b{display:block;color:var(--tx);margin-bottom:12px;font-size:14px}.fgrid a:not(.logo){display:block;padding:4px 0}.fgrid a:hover{color:var(--tx)}
+.fbrand p{margin:12px 0 16px;max-width:340px;line-height:1.5}.fnews{display:flex;gap:8px;max-width:380px}.fnews input{flex:1;min-width:0;height:40px;border-radius:99px;border:1px solid var(--line2);background:var(--surf);color:var(--tx);padding:0 14px;font:inherit}
+.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:var(--inv);color:var(--invtx);font-weight:600;padding:12px 20px;border-radius:99px;z-index:99;transition:transform .4s cubic-bezier(.2,.8,.2,1)}.toast.show{transform:translate(-50%,0)}
+.page{animation:pg .5s cubic-bezier(.2,.8,.2,1)}@keyframes pg{from{opacity:0;transform:translateY(14px)}}
+
+
+/* framed gallery cards (Aura-like) */
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px 10px 14px;transition:box-shadow .35s,border-color .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.gcard:hover{border-color:var(--line2);box-shadow:0 30px 60px -30px rgba(139,92,246,.45);transform:translateY(-3px)}
+.gcard .thumb{border-radius:14px;border:0;box-shadow:none}.gcard:hover .thumb{transform:none;box-shadow:none}
+.gcard .ov{display:block;background:none!important}.gcard .ov span{position:absolute;right:14px;top:14px;display:inline-flex;gap:8px;align-items:center;padding:10px 16px;border-radius:99px;background:var(--inv);color:var(--invtx);font-size:15px;font-weight:600;backdrop-filter:blur(8px)}
+.gmeta{padding:14px 8px 0}.gt b{font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+.tier{font:600 12px -apple-system,Inter,sans-serif;letter-spacing:.02em;padding:4px 10px;border-radius:8px;border:0;background:var(--surf2);color:var(--mut)}
+.tier.free{background:rgba(52,211,153,.14);color:#34d399}
+.gsub{margin-top:10px;font-size:14px;color:var(--mut)}.gsub .av{width:22px;height:22px}
+.gsub .acts{margin-left:auto;display:flex;align-items:center;gap:12px;color:var(--mut)}.gsub .acts button,.gsub .acts span{display:inline-flex;gap:6px;align-items:center;color:var(--mut)}.gsub .acts button:hover{color:var(--tx)}
+.gsub .sep{width:3px;height:3px;border-radius:50%;background:var(--line2)}
+.feat{margin:34px 0 8px}.feat .fh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.feat h2{font-size:30px;letter-spacing:-.03em}
+.feat .fh a{display:inline-flex;gap:8px;align-items:center;padding:11px 18px;border-radius:14px;background:var(--card);border:1px solid var(--line2);font-weight:500;font-size:16px}
+.feat .fh a:hover{box-shadow:0 8px 20px -10px rgba(0,0,0,.2)}
+.feat .ggrid .gt b{font-size:18px}
+
+/* ===== Light gallery theme (Prompts) ===== */
+.gx{padding:64px 0 20px;max-width:760px}.gx .ey{font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.12em;color:var(--a2);text-transform:uppercase}
+.gx h1{text-align:left;font-size:clamp(34px,4.2vw,52px);letter-spacing:-.035em;margin:12px 0 14px;line-height:1.05}.gx p{color:var(--mut);font-size:18px;line-height:1.6}
+.pulse{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;max-width:760px}
+.pulse .ey{margin-bottom:12px}.pr{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:14px;margin-top:8px;font-size:15px}
+.pr span{display:flex;gap:10px;align-items:center;color:#d4d4d8}.pr b{font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.pr i{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-style:normal;font-size:12px}
+.gpanel{margin:40px 0 30px;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px}
+.gtop{display:flex;gap:10px}.gsearch{flex:1;min-height:46px;flex-shrink:0;display:flex;gap:10px;align-items:center;height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:var(--surf);color:var(--mut)}
+.gsearch input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:15px;color:var(--tx)}
+.gsort{display:flex;gap:4px;border:1px solid var(--line);border-radius:12px;padding:4px;background:var(--surf)}.gsort button{padding:8px 14px;border-radius:9px;font-size:14px;color:var(--mut)}.gsort button.on{background:var(--surf2);color:var(--tx)}
+.gchips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px}.gchips button{padding:8px 14px;border-radius:99px;border:1px solid var(--line);font-size:14px;color:#c4c4cc;text-transform:capitalize;background:transparent}
+.gchips button:hover{border-color:var(--line2)}.gchips button.on{background:rgba(139,92,246,.16);border-color:rgba(139,92,246,.5);color:#ddd6fe}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 20px}
+.gcard{display:block;cursor:pointer;min-width:0}.ggrid>*{min-width:0}.gcard .thumb{border-radius:14px;border:1px solid var(--line);background:var(--surf)}
+.gcard:hover .thumb{transform:translateY(-3px);box-shadow:0 20px 40px -18px rgba(0,0,0,.28);border-color:var(--line2)}
+
+.gmeta{padding:12px 2px 0}.gt{display:flex;justify-content:space-between;align-items:center;gap:10px}.gt b{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tier{flex:none}
+.tier.free{background:#ECFDF5;border-color:#A7F3D0;color:#047857}
+.gsub{display:flex;align-items:center;gap:8px;margin-top:7px;font-size:13px;color:var(--mut)}.gsub .av{width:18px;height:18px;border-radius:50%;background:conic-gradient(var(--a1),var(--a2),var(--a3),var(--a1))}
+.gsub .dot{opacity:.5}.gsub .cp{margin-left:auto;display:flex;gap:5px;align-items:center;color:#52525B}.gsub .cp:hover{color:var(--tx)}
+.gmore{display:flex;justify-content:center;margin-top:30px}.gcount{font-size:13px;color:var(--mut);margin-top:-6px;margin-bottom:14px}
+.thumb img,.thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:1000px){.ggrid{grid-template-columns:1fr 1fr}.gtop{flex-direction:column}.gsort{align-self:flex-start}}@media(max-width:620px){.ggrid{grid-template-columns:1fr}}
+
+
+/* Motif mark (A · Glance) */
+.mk{--s:28px;position:relative;display:inline-block;flex:none;width:var(--s);height:var(--s);border-radius:31%;background:conic-gradient(from 210deg,#8b5cf6,#22d3ee,#f472b6,#8b5cf6);box-shadow:inset 0 -2px 5px rgba(0,0,0,.25),inset 0 2px 4px rgba(255,255,255,.35),0 4px 12px rgba(139,92,246,.35);animation:mkb 4s ease-in-out infinite;vertical-align:middle}
+.mk.sm{--s:20px}
+.mk .ey{position:absolute;top:36%;width:20%;height:26%;border-radius:50%;background:#fff;overflow:hidden;transition:height .08s,top .08s}
+.mk .ey.l{left:26%}.mk .ey.r{left:54%}
+.mk .ey b{position:absolute;left:50%;top:50%;width:64%;height:56%;border-radius:50%;background:#0b0b10;transform:translate(-50%,-50%)}
+.mk.blink .ey{height:4%;top:47%}
+.logo:hover .mk{animation:mks .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes mkb{50%{transform:scale(1.04) translateY(-1px)}}@keyframes mks{30%{transform:scale(1.15,.85)}60%{transform:scale(.94,1.06)}100%{transform:none}}
+.drop .mk{margin-right:2px}
+
+@media(max-width:1000px){.links{display:none}.grid,.grid.three{grid-template-columns:1fr}.detail{grid-template-columns:1fr}.side{position:static}.plans,.cats,.picks{grid-template-columns:1fr 1fr}.plan.hot{transform:none}.srch{display:none}.info h3{font-size:22px}}
+@media(max-width:620px){.plans,.cats,.picks{grid-template-columns:1fr}.wrap{padding:0 18px}select.sort{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ---------- light theme ---------- */
+html[data-theme=light]{color-scheme:light;--bg:#f7f7f5;--card:#ffffff;--line:rgba(17,17,20,.09);--line2:rgba(17,17,20,.16);--tx:#111114;--mut:#52525b;--surf:#f0f0ed;--surf2:#e6e6e2;--tx2:#27272a;--inv:#111114;--invtx:#fff;--hover:rgba(17,17,20,.05);--navbg:rgba(247,247,245,.8);--ink:#ffffff}
+html[data-theme=dark]{color-scheme:dark}
+html[data-theme=light] .thumb,html[data-theme=light] .gcard{box-shadow:0 1px 2px rgba(17,17,20,.04)}
+html[data-theme=light] .gcard:hover{box-shadow:0 18px 40px -18px rgba(17,17,20,.25)}
+.demo.launch{background:linear-gradient(90deg,#1b1233,#0f2230);color:#e9e3ff;border-color:var(--line)}
+html[data-theme=light] .demo.launch{background:linear-gradient(90deg,#efe9ff,#e2f6f9);color:#2b2160}
+.theme{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line2);border-radius:99px;background:var(--surf)}
+.theme button{width:32px;height:28px;border-radius:99px;display:grid;place-items:center;color:var(--mut);transition:background .2s,color .2s}
+.theme button[aria-pressed=true]{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.theme button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+
+/* ---------- ask / finder chat box ---------- */
+.hero{padding-left:32px;padding-right:32px}@media(max-width:700px){.hero{padding-left:18px;padding-right:18px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ask{position:relative;max-width:820px;margin:34px auto 0;text-align:left;background:var(--card);border:1px solid var(--line2);border-radius:24px;padding:16px 16px 12px;box-shadow:0 30px 80px -40px rgba(139,92,246,.45);transition:border-color .25s,box-shadow .25s}
+.ask:focus-within{border-color:rgba(139,92,246,.6);box-shadow:0 0 0 4px rgba(139,92,246,.14),0 30px 80px -40px rgba(139,92,246,.55)}
+.ask textarea{width:100%;resize:none;border:0;outline:0;background:transparent;color:var(--tx);font:inherit;font-size:17px;line-height:1.5;padding:4px 6px 10px;min-height:56px}
+.ask textarea::placeholder{color:var(--mut)}
+.askbar{display:flex;align-items:center;gap:10px}
+.askchips{flex:1;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.askchips .sep{width:1px;height:20px;background:var(--line2);margin:0 4px}
+.ch{padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surf);color:var(--mut);font-size:13.5px;font-weight:500;transition:all .2s}
+.ch:hover{color:var(--tx)}.ch.on{color:var(--tx);border-color:var(--line2);background:var(--surf2)}
+.ch:focus-visible,.asksend:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.asksend{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--inv);color:var(--invtx);transition:transform .2s}
+.asksend:hover{transform:translateY(-1px)}
+#askout{max-width:1100px;margin:0 auto;text-align:left}
+.chat{margin:26px auto 0;max-width:820px;display:flex;flex-direction:column;gap:12px}
+.bub{max-width:85%;padding:12px 16px;border-radius:18px;font-size:15px;line-height:1.55}
+.bub.me{align-self:flex-end;background:var(--surf2);border-bottom-right-radius:6px}
+.bub.mo{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:6px;display:flex;gap:10px;align-items:flex-start}
+.bub.mo .mk{--s:22px;margin-top:1px}
+.askres{margin-top:22px}
+.askres .why{font-size:13px!important;line-height:1.4;color:var(--mut);margin:0 0 0 auto!important;max-width:none!important;text-align:right}
+.askact{display:flex;gap:8px;margin:12px 6px 0;align-items:center;min-height:38px}
+.askact .btn{padding:8px 14px;font-size:13.5px}
+@media(max-width:700px){.askchips .sep{display:none}.bub{max-width:100%}}
+
+/* hero: original text + small chat pill + featured above the fold */
+.page>.hero{padding-top:56px;padding-bottom:0}
+.page>.hero h1{font-size:clamp(44px,6.2vw,92px);margin:22px auto 16px}
+.page>.hero .sub{margin-bottom:22px}
+.ask{display:flex;align-items:center;gap:6px;max-width:600px;margin:0 auto;padding:6px 6px 6px 18px;border-radius:99px}
+.ask textarea{flex:1;min-height:0;height:24px;padding:2px 0;font-size:15px;line-height:20px;white-space:nowrap;overflow:hidden}
+.ask .askchips{flex:none;gap:2px}.ask .ch{padding:5px 9px;font-size:12.5px;border-radius:99px}
+.ask .asksend{width:36px;height:36px;border-radius:50%}
+.herobtns{display:flex;gap:12px;justify-content:center;margin-top:18px;position:relative}
+.hfh{margin-top:44px}
+#hfeat{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:1100px){#hfeat .gsub{font-size:0}#hfeat .gsub .av{display:none}#hfeat .gsub .acts{font-size:14px;margin-left:0}}@media(max-width:640px){#hfeat{grid-template-columns:1fr}}
+.page>.hero+.wrap .cats{margin-top:40px}
+@media(max-width:620px){.ask{flex-wrap:wrap;border-radius:18px;padding:10px}.ask textarea{flex-basis:100%;white-space:normal;height:auto;min-height:40px}.ask .askchips{flex:1}}
+
+/* skills page: community open-source strip */
+.oss{margin:6px 0 34px;padding:22px;border:1px solid var(--line);border-radius:26px;background:var(--surf)}
+.oss-h{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.oss-h h2{font-size:28px;letter-spacing:-.03em}.oss-h p{color:var(--mut);font-size:14px;max-width:420px;line-height:1.5}
+.oss-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,1fr);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+.oss-row>*{scroll-snap-align:start}
+.oss-row .item h3{font-size:16px;flex-wrap:wrap}.oss-row .item p{font-size:13px}.oss-row .item .bdg.b-new{display:none}
+@media(min-width:1200px){.oss-row{grid-auto-columns:calc((100% - 54px)/4)}}
+
+/* light mode: readable text (AA contrast on #f7f7f5) */
+html[data-theme=light]{--a2:#0e7490}
+html[data-theme=light] .eb,html[data-theme=light] .gx .ey{color:#0e7490}
+html[data-theme=light] .pr span{color:#27272a}
+html[data-theme=light] .tabs button{color:#3f3f46}
+html[data-theme=light] .tabs button.on,html[data-theme=light] .tabs button:hover{color:#09090b}
+html[data-theme=light] .gchips button{color:#3f3f46}
+html[data-theme=light] .gchips button.on{color:#5b21b6}
+html[data-theme=light] .ic{color:#3f3f46}
+html[data-theme=light] .b-free,html[data-theme=light] .tier.free{color:#047857;background:#ecfdf5;border-color:#a7f3d0}
+html[data-theme=light] .b-new{color:#0e7490;background:#ecfeff;border-color:#a5f3fc}
+html[data-theme=light] .links a.on,html[data-theme=light] .links a:hover{color:#09090b}
+html[data-theme=light] h1,html[data-theme=light] h2,html[data-theme=light] h3{color:#09090b}
+
+/* ---------- light mode v2: clean white + cobalt (no purple gradients) ---------- */
+html[data-theme=light]{--bg:#ffffff;--card:#ffffff;--surf:#f6f7f9;--surf2:#eef0f4;--line:#e8eaee;--line2:#dfe2e8;--tx:#0a0a0a;--tx2:#334155;--mut:#64748b;--inv:#0a0a0a;--navbg:rgba(255,255,255,.85);--a2:#2848e0;--blue:#2848e0;--blue2:#3d5cff}
+html[data-theme=light] body{letter-spacing:-.01em}
+html[data-theme=light] .hero::before{display:none}
+html[data-theme=light] .demo.launch{background:#f1f4ff;color:#1e2b6f;border-bottom:1px solid #e3e8ff}
+html[data-theme=light] .eb,html[data-theme=light] .gx .ey{color:var(--blue);letter-spacing:.14em}
+html[data-theme=light] h1,html[data-theme=light] h2,html[data-theme=light] h3{color:#0a0a0a;letter-spacing:-.045em}
+html[data-theme=light] h1 em,html[data-theme=light] h2 em{font-family:var(--font);font-style:normal;font-weight:inherit;letter-spacing:inherit;color:var(--blue)}
+html[data-theme=light] .hero h1 em{color:#0a0a0a}
+html[data-theme=light] .rot span{background:none;-webkit-text-fill-color:var(--blue);color:var(--blue)}
+html[data-theme=light] .drop{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(15,23,42,.05)}
+html[data-theme=light] .btn.w,html[data-theme=light] .asksend{background:linear-gradient(180deg,var(--blue2),var(--blue));color:#fff;box-shadow:0 10px 28px -10px rgba(40,72,224,.65),inset 0 1px 0 rgba(255,255,255,.25)}
+html[data-theme=light] .btn.w:hover{box-shadow:0 14px 34px -10px rgba(40,72,224,.75),inset 0 1px 0 rgba(255,255,255,.25)}
+html[data-theme=light] .btn.g{background:#fff;border-color:var(--line2);color:#0a0a0a;box-shadow:0 1px 2px rgba(15,23,42,.06)}
+html[data-theme=light] .ask{background:#fff;border-color:var(--line2);box-shadow:0 12px 40px -18px rgba(40,72,224,.28),0 1px 2px rgba(15,23,42,.05)}
+html[data-theme=light] .ask:focus-within{border-color:rgba(40,72,224,.55);box-shadow:0 0 0 4px rgba(40,72,224,.12),0 12px 40px -18px rgba(40,72,224,.35)}
+html[data-theme=light] .ch{background:#fff;border-color:var(--line)}
+html[data-theme=light] .ch.on{background:#eef2ff;border-color:#c7d2fe;color:#1e2b6f}
+html[data-theme=light] .cat{background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+html[data-theme=light] .cat::after{opacity:.16;filter:blur(36px)}
+html[data-theme=light] .cat:hover{box-shadow:0 18px 40px -22px rgba(15,23,42,.25)}
+html[data-theme=light] .gcard,html[data-theme=light] .item .thumb{box-shadow:0 1px 2px rgba(15,23,42,.05)}
+html[data-theme=light] .gcard:hover{box-shadow:0 22px 44px -24px rgba(15,23,42,.28)}
+html[data-theme=light] .tier{background:#f1f5f9;color:#475569}
+html[data-theme=light] .theme button[aria-pressed=true]{box-shadow:0 1px 3px rgba(15,23,42,.15)}
+html[data-theme=light] .plan.hot{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--blue2),#7c93ff) border-box}
+html[data-theme=light] .pro{background:var(--blue)}
+html[data-theme=light] .bub.mo .mk{filter:none}
+html[data-theme=light] .page>.wrap,html[data-theme=light] .page.wrap{position:relative}
+html[data-theme=light] .rb{background:var(--blue);color:#fff}
+html[data-theme=light] .plan.hot{box-shadow:0 30px 60px -30px rgba(40,72,224,.35)}
+html[data-theme=light] .plan ul li::first-letter,html[data-theme=light] .plan ul{color:#334155}
+
+/* thank-you page */
+.thx{max-width:760px;padding:70px 32px 40px}.thx-top{text-align:center}.thx h1{font-size:56px;margin:12px auto 10px}
+.thx-steps{list-style:none;display:grid;gap:12px;margin:34px 0 0;padding:0}
+.thx-steps li{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+.thx-steps li>span{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--surf2);color:var(--tx)}
+.thx-steps div>b{display:block;font-size:16px;margin-bottom:4px}.thx-steps p b{color:var(--tx)}.thx-steps p{color:var(--mut);font-size:15px;line-height:1.55}
+.thx-steps code{font-size:13px;padding:1px 6px;border-radius:6px;background:var(--surf)}
+.thx-help{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 20px;border:1px dashed var(--line2);border-radius:18px}
+.thx-help p{color:var(--mut);font-size:14px;margin-top:3px}
+
+/* guide + what you get */
+.guide{max-width:880px}.gbox{margin:26px 0 24px;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--card)}.gbox pre{margin-top:10px;max-height:none}
+.gtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.gtabs a{padding:9px 14px;border-radius:99px;border:1px solid var(--line);font-size:14.5px;color:var(--mut)}.gtabs a.on{background:var(--inv);color:var(--invtx);border-color:transparent}
+.gpanel2{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--card)}.gpanel2 h3{font-size:22px;margin-bottom:12px}
+.gpanel2 ol{padding-left:22px;display:grid;gap:10px;line-height:1.6;color:var(--tx2)}.gpanel2 pre{margin-top:14px}.gpanel2 code,.wyg code{font-size:13px;padding:1px 6px;border-radius:6px;background:var(--surf)}
+.gnote{margin-top:14px;font-size:14px;color:var(--mut);line-height:1.6}.gnote a{text-decoration:underline}
+.wyg{max-width:980px;margin:50px auto 0}.wyg h2{font-size:30px;letter-spacing:-.03em;margin:6px 0 16px}
+.wyg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.wyg-grid div{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--card)}.wyg-grid b{font-size:17px}.wyg-grid p{color:var(--mut);margin-top:6px;line-height:1.55;font-size:15px}
+.wyg-note{margin-top:14px;color:var(--mut);font-size:14px;line-height:1.6}.wyg-note a{color:var(--tx);text-decoration:underline}
+@media(max-width:700px){.wyg-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo launch">🚀 Founding launch: lifetime access $99. Price goes up as the library grows. <a href="#/pricing" style="text-decoration:underline">Claim it</a></div>
+<nav><div class="wrap">
+  <a class="logo" href="#/" aria-label="Motif home"><span class="mk"><i class="ey l"><b></b></i><i class="ey r"><b></b></i></span>Motif</a>
+  <div class="links" id="links">
+    <a href="#/prompts">Prompts<small id="n-prompt"></small></a><a href="#/skills">Skills<small id="n-skill"></small></a><a href="#/decks">Decks<small id="n-deck"></small></a><a href="#/free">Free<small id="n-free"></small></a><a href="#/pricing">Pricing</a>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;margin-left:auto"><div class="theme" role="group" aria-label="Color theme"><button type="button" data-theme-set="light" aria-label="Light mode" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-theme-set="dark" aria-label="Dark mode" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></div><div class="right" id="auth"></div></div>
+</div></nav>
+
+<main id="app"></main>
+
+<footer><div class="wrap fgrid">
+  <div class="fbrand"><a class="logo" href="#/"><i></i>Motif</a><p>UX-grade skills, deck styles and prompts for AI agents. Made by a working UX designer.</p>
+   <form class="fnews" onsubmit="event.preventDefault();say('Thanks! You\'re on the list ✓');this.reset()"><input type="email" required placeholder="you@email.com" aria-label="Email for new drops"><button class="btn w sm">Get new drops</button></form></div>
+  <div><b>Library</b><a href="#/prompts">Prompts</a><a href="#/skills">Skills</a><a href="#/decks">Decks</a><a href="#/free">Free &amp; picks</a></div>
+  <div><b>Motif</b><a href="#/pricing">Pricing</a><a href="#/guide">How to use</a><a href="#/legal/delivery">Getting your files</a><a href="#" data-act="tip">Buy me a coffee</a><a href="#/contact">Contact</a></div>
+  <div><b>Legal</b><a href="#/legal/license">License</a><a href="#/legal/refunds">Refunds</a><a href="#/legal/terms">Terms</a><a href="#/legal/privacy">Privacy</a></div>
+ </div>
+ <div class="wrap fbot"><span>© 2026 Motif. Built by a UX designer.</span><span>Claude, Cursor, Lovable and other names are trademarks of their owners. Motif isn't affiliated with them.</span></div></footer>
+
+<div class="md" id="md"><div class="box" id="box"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA=/*__DATA__*/[];
+const PICKS=[
+ ["Hallmark","Nutlope","MIT","Anti-AI-look build, audit & redesign modes","https://github.com/Nutlope/hallmark"],
+ ["Impeccable","Paul Bakaus","Apache 2.0","Critique → audit → polish for existing UI","https://github.com/pbakaus/impeccable"],
+ ["Taste Skill","Leonxlnx","MIT","Variance, motion & density art-direction dials","https://github.com/Leonxlnx/taste-skill"],
+ ["UI Skills","ibelick","MIT","Modular UI context loaded per task","https://github.com/ibelick/ui-skills"],
+ ["GSAP AI Skills","GreenSock","MIT","Official GSAP & ScrollTrigger knowledge","https://github.com/greensock/gsap-skills"],
+ ["UI/UX Pro Max","nextlevelbuilder","MIT","Styles, palettes, font pairs & UX rules","https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"],
+ ["frontend-design","Anthropic","Apache 2.0","Official baseline for non-generic frontends","https://github.com/anthropics/skills"],
+ ["Awesome AI Video Prompts","geekjourneyx","MIT","Prompt techniques for Veo, Sora, Runway, Kling","https://github.com/geekjourneyx/awesome-ai-video-prompts"],
+ ["Remotion Video Skill","wshuyi","MIT (per README)","Code-built videos with Remotion + TTS","https://github.com/wshuyi/remotion-video-skill"],
+];
+const PAGES={
+ skill:{path:"skills",title:"Agent Skills",lead:"Installable SKILL.md packages that give Claude, Cursor and Codex real UX judgment.",sub:["all","ux","ai","motion","video","research","brand","systems","marketing","career","a11y","open-source"]},
+ deck:{path:"decks",title:"Slide Deck Skills",lead:"Distinct presentation styles, each with its own storyline method and PDF/PPTX export. Two include complete sample decks.",sub:["all","business","teaching","research","launch","brand"]},
+ prompt:{path:"prompts",title:"Website Prompts",lead:"Copy-paste design briefs for Lovable, Bolt, v0, Cursor and Claude, across SaaS, e-commerce, portfolios, hospitality and more.",sub:["all","landing","hero","app","saas","ecommerce","sections","portfolio","ai","mobile","editorial"]},
+ free:{path:"free",title:"Free",lead:"Try the craft before you buy. Plus our favorite open-source picks from the community.",sub:["all","skill","deck","prompt"]},
+};
+const ICON={ext:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M18 14v4a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18V7.5A1.5 1.5 0 0 1 5.5 6H10"/></svg>',copy:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+ crown:'<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4.5 4L12 5l4.5 6L21 7l-2 11H5L3 7z"/></svg>',
+ dl:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>',
+ lock:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+ g:'<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C41.4 35.2 44 30 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>'};
+
+/* ---------- demo session (in-memory only) ---------- */
+const S={user:null,pro:false};
+const canAccess=d=>d.free||S.pro;
+const SIGNIN_ENABLED=false; /* turn on after real Google login is built */
+function renderAuth(){const a=document.getElementById('auth');if(!SIGNIN_ENABLED){a.innerHTML='<a class="btn w sm" href="#/pricing">Get Pro</a>';return}
+  a.innerHTML=S.user?`<a href="#/account" class="user"><i>${S.user.name[0]}</i>${S.user.name.split(' ')[0]}${S.pro?' <span class="pro">PRO</span>':''}</a>${S.pro?'':'<a class="btn w sm" href="#/pricing">Go Pro</a>'}`
+   :`<button class="gbtn" data-act="login">${ICON.g} Sign in with Google</button>`}
+function modal(html){document.getElementById('box').innerHTML=html;document.getElementById('md').classList.add('open')}
+function closeM(){document.getElementById('md').classList.remove('open')}
+document.getElementById('md').addEventListener('click',e=>{if(e.target.id==='md')closeM()});addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+function login(after){modal(`${ICON.g.replace('18','40').replace('18','40')}<h3>Sign in to Motif</h3><p>We use your Google account to remember your library and Pro access. No password to create.</p>
+ <button class="gbtn" style="margin-top:20px;width:100%;justify-content:center;padding:13px" data-act="dologin" data-after="${after||''}">${ICON.g} Continue with Google</button>
+ <p style="font-size:12px;margin-top:14px">Google sign-in is coming soon. This is a preview. You don't need an account to buy.</p>`)}
+/* ---------- Checkout config ----------
+   1) Paste your Lemon Squeezy checkout links below (Store → Products → Share → Checkout link).
+   2) If a link is empty, that plan falls back to PayPal automatically. */
+const LEMON={pro:"",life:"",tip:""};
+/* 4) Contact form: sends to your inbox via FormSubmit (first message triggers a one-time activation email). */
+const CONTACT_TO="tosandy.work@gmail.com";
+/* 3) Buy Me a Coffee: paste your page, e.g. "https://buymeacoffee.com/yourname". Empty = PayPal tip. */
+const BMC_URL="";
+/* ---------- PayPal fallback ---------- */
+const LIVE_SITE="https://sunny-crumble-7de34c.netlify.app/";
+const PAYPAL={business:"sandyca88@yahoo.com",currency:"USD",site:/^https?:$/.test(location.protocol)&&!/^(localhost|127\.)/.test(location.hostname)?location.href.split('#')[0]:LIVE_SITE};
+const PLANS={ pro:{name:"Motif Pro (1 year)",sub:false,amount:"49.00",label:"$49 for 1 year"},
+ life:{name:"Motif Founding Lifetime",sub:false,amount:"99.00",label:"$99 one-time"},
+ tip:{name:"Coffee for Motif",sub:false,amount:"5.00",label:"$5 tip"}};
+function ppForm(key){const p=PLANS[key];const f={business:PAYPAL.business,item_name:p.name,item_number:"motif-"+key,currency_code:PAYPAL.currency,no_shipping:"1",charset:"utf-8",
+  return:PAYPAL.site+"#/thanks/"+key,cancel_return:PAYPAL.site+"#/pricing",custom:S.user?S.user.email:""};
+ if(p.sub)Object.assign(f,{cmd:"_xclick-subscriptions",a3:p.a3,p3:"1",t3:p.t3,src:"1",sra:"1"});else Object.assign(f,{cmd:"_xclick",amount:p.amount});
+ return `<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">${Object.entries(f).map(([k,v])=>`<input type="hidden" name="${k}" value="${String(v).replace(/"/g,'&quot;')}">`).join('')}
+ <button type="submit" class="btn" style="width:100%;margin-top:18px;background:#FFC439;color:#111;font-weight:700">Pay ${p.label} with PayPal</button></form>`}
+function lemonUrl(plan){const u=LEMON[plan];if(!u)return null;const q=new URLSearchParams();if(S.user&&S.user.email)q.set('checkout[email]',S.user.email);q.set('checkout[custom][plan]',plan);return u+(u.includes('?')?'&':'?')+q}
+function tipModal(){modal(`<div style="font-size:44px">☕</div><h3>Buy me a coffee</h3><p>Tips keep the free drops coming. Pick an amount:</p>
+ <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">${[3,5,10].map(v=>`<button class="btn g sm" data-act="tipamt" data-v="${v}">$${v}</button>`).join('')}</div><div id="tipf"></div>
+ <button class="btn g" style="width:100%;margin-top:10px" onclick="closeM()">Maybe later</button>`);setTip(5)}
+function setTip(v){PLANS.tip.amount=v.toFixed(2);PLANS.tip.label='$'+v+' tip';document.querySelectorAll('[data-act=tipamt]').forEach(b=>{const on=+b.dataset.v===v;b.style.background=on?'#fff':'';b.style.color=on?'#000':''});document.getElementById('tipf').innerHTML=ppForm('tip')}
+function checkout(plan){const p=PLANS[plan];const ls=lemonUrl(plan);
+ if(ls){modal(`<div class="eb">Secure checkout</div><h3>${p.name}</h3><p>Pay by card, Apple Pay or PayPal on our Lemon Squeezy checkout. Your download link is emailed instantly after payment.</p>
+ <a class="btn w" style="width:100%;margin-top:18px" href="${ls}" target="_top">Continue to checkout · ${p.label}</a>
+ <p style="font-size:12px;margin-top:12px">Prefer PayPal directly?</p>${ppForm(plan).replace('margin-top:18px','margin-top:6px')}
+ <button class="btn g" style="width:100%;margin-top:10px" onclick="closeM()">Cancel</button>`);return}
+ modal(`<div class="eb">Secure checkout</div><h3>${p.name}</h3><p>You'll pay on PayPal (PayPal balance or any card, no account needed for cards).${p.sub?' Cancel anytime from your PayPal account.':''}</p>
+ ${ppForm(plan)}<p style="font-size:12px;margin-top:12px">After payment, your Pro download link is emailed to your PayPal address within 24 hours.</p>
+ <button class="btn g" style="width:100%;margin-top:10px" onclick="closeM()">Cancel</button>`)}
+/* ---------- thumbnails ---------- */
+const ro=new ResizeObserver(es=>es.forEach(e=>fit(e.target)));
+function fit(b){const f=b.querySelector('iframe');if(!f)return;const s=Math.max(b.clientWidth/1280,b.clientHeight/800);f.style.transform=`scale(${s})`;f.style.left=((b.clientWidth-1280*s)/2)+'px'}
+const lazy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const b=e.target;if(!b.querySelector('iframe,img')){const d=DATA[b.dataset.i];if(d.vid){const v=document.createElement('video');v.src=d.vid;if(d.img)v.poster=d.img;v.muted=true;v.loop=true;v.playsInline=true;v.autoplay=!matchMedia('(prefers-reduced-motion: reduce)').matches;v.setAttribute('aria-label',d.t+' animated preview');v.preload='metadata';b.prepend(v)}else if(d.img){const im=document.createElement('img');im.src=d.img;im.alt=d.t+' preview';im.loading='lazy';im.decoding='async';b.prepend(im)}else{const f=document.createElement('iframe');f.setAttribute('sandbox','');f.title=d.t+' preview';f.srcdoc=d.html;b.prepend(f);ro.observe(b);fit(b)}}lazy.unobserve(b)}),{rootMargin:'400px'});
+function hydrate(root){root.querySelectorAll('.thumb[data-i]').forEach(b=>lazy.observe(b))}
+const kindLabel={skill:'Skill',deck:'Deck skill',prompt:'Prompt'};
+function card(d){const i=DATA.indexOf(d);const act=d.ext?['ext','Open on GitHub']:canAccess(d)?(d.kind==='prompt'?['copy','Copy prompt']:['dl','Download']):['crown','Pro'];
+ return `<a class="item" href="#/item/${d.k}"><div class="thumb" data-i="${i}"><div class="ov"><span>View</span></div>${canAccess(d)?'':`<span class="lockc">${ICON.lock}</span>`}</div>
+ <div class="info"><div><h3>${d.t}${d.free?'<span class="bdg b-free">FREE</span>':''}${d.new?'<span class="bdg b-new">NEW</span>':''}</h3><p>${kindLabel[d.kind]} · ${d.c}</p></div>
+ <button class="ic" data-act="quick" data-k="${d.k}" title="${act[1]}" aria-label="${act[1]}">${ICON[act[0]]}</button></div></a>`}
+
+/* ---------- pages ---------- */
+const app=document.getElementById('app');
+const OWN=()=>DATA.filter(d=>!d.ext).length;const own=k=>DATA.filter(d=>!d.ext&&d.kind===k).length;
+const count=k=>k==='free'?DATA.filter(d=>d.free).length:DATA.filter(d=>d.kind===k).length;
+const HERO3=['jade','meridian','concord'];
+function home(){const picks=DATA.filter(d=>d.pick).sort((a,b)=>a.pick-b.pick),fresh=DATA.filter(d=>d.new&&!d.ext).slice(-6).reverse();
+ app.innerHTML=`<div class="page"><header class="hero wrap"><div class="drop"><span class="mk sm"><i class="ey l"><b></b></i><i class="ey r"><b></b></i></span>${OWN()} skills, decks &amp; prompts · made by a UX designer</div>
+ <h1>Give your AI agent <em>real</em> <span class="rot" id="rot"><span>taste.</span><span>UX sense.</span><span>motion.</span><span>polish.</span></span></h1>
+ <p class="sub">Agent Skills, deck styles and copy-paste website prompts built on real UX craft. Install, paste, and ship work that looks designed.</p>
+ <form class="ask" id="ask" role="search" aria-label="Find a template for your project">
+  <label for="askq" class="sr">Describe what you're building</label>
+  <textarea id="askq" rows="1" placeholder="What are you building? Try “jewelry store”"></textarea>
+  <div class="askchips" role="group" aria-label="Type">${[['all','All'],['prompt','Website'],['skill','Skill'],['deck','Deck']].map(([v,l],i)=>`<button type="button" class="ch${i?'':' on'}" data-askt="${v}" aria-pressed="${!i}">${l}</button>`).join('')}</div>
+  <button type="submit" class="asksend" aria-label="Find matches"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+ </form>
+ <div id="askout" aria-live="polite"></div>
+ <div class="herobtns"><a class="btn w" href="#/prompts">Browse prompts →</a><a class="btn g" href="#/free">Start free</a></div></header>
+ <div class="wrap">
+ <div class="sh hfh"><div><div class="eb">Featured</div><h2>Cinematic <em>templates.</em></h2></div><a href="#/prompts">All ${count('prompt')} prompts →</a></div>
+ <div class="ggrid" id="hfeat"></div>
+ <div class="cats">
+  <a class="cat" href="#/prompts" style="--c:#22d3ee"><span class="n">${count('prompt')}</span><b>Prompts</b><span>Animated heroes, landing, apps</span></a>
+  <a class="cat" href="#/skills" style="--c:#8b5cf6"><span class="n">${count('skill')}</span><b>Skills</b><span>UX, AI art, research, systems</span></a>
+  <a class="cat" href="#/decks" style="--c:#f472b6"><span class="n">${count('deck')}</span><b>Decks</b><span>${count('deck')} presentation styles</span></a>
+  <a class="cat" href="#/free" style="--c:#34d399"><span class="n">${count('free')}</span><b>Free</b><span>Plus community picks</span></a></div>
+ 
+ 
+ <div class="sh"><div><div class="eb">Editor's picks</div><h2>Start with the <em>best.</em></h2></div><a href="#/prompts">View all →</a></div>
+ <div class="grid">${picks.slice(0,4).map(card).join('')}</div>
+ <div class="sh"><div><div class="eb">Just dropped</div><h2>New this <em>month.</em></h2></div><a href="#/prompts">See all prompts →</a></div>
+ <div class="grid three">${fresh.map(card).join('')}</div>
+ ${picksBlock()}${pricingTeaser()}</div></div>`;
+ {const hf=document.getElementById('hfeat');if(hf)hf.innerHTML=HERO3.map(k=>DATA.find(d=>d.k===k)).filter(Boolean).map(gcard).join('')}
+ rotator();hydrate(app)}
+function picksBlock(){return `<div class="sh"><div><div class="eb">Free picks</div><h2>Great open-source skills <em>we use.</em></h2></div></div>
+ <div class="picks">${PICKS.map(p=>`<a class="pk" href="${p[4]}" target="_blank" rel="noopener"><b>${p[0]} ↗</b>${p[3]}<span>by ${p[1]}</span><em>${p[2]}</em></a>`).join('')}</div>
+ <p class="count" style="margin-top:10px">Made by their authors and linked with credit. Not affiliated with Motif.</p>`}
+function pricingTeaser(){return `<div class="tip" style="margin-top:60px"><div><div class="eb">Pro</div><h2 style="font-size:32px;letter-spacing:-.03em">Everything, for about $4 a month.</h2><p class="count">All ${OWN()} Motif items + new drops · $49/yr</p></div><a class="btn w" href="#/pricing">See pricing</a></div>`}
+
+const st={q:'',sub:'all',sort:'new',shown:12};
+function ossStrip(){const OSSFIRST=['af_mengto'];const L=DATA.filter(d=>d.ext&&d.kind==='skill').sort((a,b)=>{const ia=OSSFIRST.indexOf(a.k),ib=OSSFIRST.indexOf(b.k);return (ia<0?99:ia)-(ib<0?99:ib)||a.order-b.order});if(!L.length)return '';
+ return `<section class="oss" aria-labelledby="oss-h"><div class="oss-h"><div><div class="eb">Free · open source</div><h2 id="oss-h">Community picks <em>we love.</em></h2></div><p>${L.length} free skills by their original authors (MIT/Apache). Each one opens on GitHub, credited and not re-hosted.</p></div>
+ <div class="oss-row">${L.map(card).join('')}</div></section>`}
+function library(kind){const P=PAGES[kind];
+ app.innerHTML=`<div class="page wrap"><div class="ph"><div class="eb">Library</div><h1>${P.title}</h1><p>${P.lead}</p></div>
+ ${kind==='skill'?ossStrip():''}<div class="bar"><div class="tb"><div class="tabs" id="tabs"><span class="ink"></span>${P.sub.map(s=>`<button data-sub="${s}" class="${s===st.sub?'on':''}">${s==='all'?'All':s==='deck'?'Decks':s==='skill'?'Skills':s==='prompt'?'Prompts':s}</button>`).join('')}</div>
+ <label class="srch">⌕<input id="q" placeholder="Search ${P.title.toLowerCase()}…" value="${st.q}"></label>
+ <select class="sort" id="sort"><option value="new">Newest</option><option value="az">A–Z</option><option value="free">Free first</option></select></div><div class="count" id="cnt"></div></div>
+ <div class="grid" id="grid"></div><div class="more" id="more"></div>${kind==='free'?picksBlock():''}</div>`;
+ const tabs=document.getElementById('tabs'),ink=tabs.querySelector('.ink');const mv=()=>{const b=tabs.querySelector('.on');ink.style.left=b.offsetLeft+'px';ink.style.width=b.offsetWidth+'px'};requestAnimationFrame(mv);
+ tabs.onclick=e=>{const b=e.target.closest('button');if(!b)return;tabs.querySelector('.on').classList.remove('on');b.classList.add('on');mv();st.sub=b.dataset.sub;st.shown=12;fill(kind)};
+ {const o=app.querySelector('.oss');if(o)hydrate(o)}
+ document.getElementById('q').oninput=e=>{st.q=e.target.value.toLowerCase().trim();st.shown=12;fill(kind)};
+ const so=document.getElementById('sort');so.value=st.sort;so.onchange=e=>{st.sort=e.target.value;fill(kind)};fill(kind)}
+const gs={q:'',sub:'all',sort:'new',shown:18};
+function gcard(d){const i=DATA.indexOf(d),ok=canAccess(d);
+ const eye='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+ const cp=ICON.copy.replace(/22/g,'16');
+ return `<a class="gcard" href="#/item/${d.k}"><div class="thumb" data-i="${i}"><div class="ov"><span>${ok?cp+' Copy prompt':ICON.lock+' Unlock with Pro'}</span></div></div>
+ <div class="gmeta"><div class="gt"><b>${d.t} ${d.c} Prompt</b><span class="tier ${d.free?'free':''}">${d.free?'FREE':'PRO'}</span></div>
+ <div class="gsub"><i class="av"></i>Motif Studio<span class="acts"><button data-act="quick" data-k="${d.k}" aria-label="${ok?'Copy prompt':'Unlock with Pro'}">${ok?cp+' Copy':ICON.crown.replace(/24/g,'15')+' Pro'}</button><i class="sep"></i><span>${eye} Preview</span></span></div></div></a>`}
+function gallery(){const L=DATA.filter(d=>d.kind==='prompt'),fr=L.filter(d=>d.free).length;const P=PAGES.prompt;
+ app.innerHTML=`<div class="page wrap"><div class="gx"><div class="ey">Website prompt templates</div><h1>Copy-paste prompts for beautiful websites</h1>
+ <p>Design briefs for Lovable, Bolt, v0, Cursor and Claude, covering SaaS, e-commerce, portfolios, hospitality and more. Pick one, swap the [BRACKETS], and ship.</p>
+ <div class="pulse"><div class="ey">Library pulse</div>
+  <div class="pr"><span><i style="background:rgba(52,211,153,.15);color:#34d399">✓</i>Free</span><b>${fr}</b></div>
+  <div class="pr"><span><i style="background:rgba(251,191,36,.15);color:#fbbf24">★</i>Pro</span><b>${L.length-fr}</b></div>
+  <div class="pr"><span><i style="background:rgba(139,92,246,.16);color:#c4b5fd">▦</i>Categories</span><b>${P.sub.length-1}</b></div></div></div>
+ <div class="feat"><div class="fh"><h2>Featured</h2><a href="#" id="fall">Browse all <span aria-hidden="true">→</span></a></div><div class="ggrid" id="fgrid"></div></div>
+ <div class="gpanel" id="gpanel"><div class="gtop"><label class="gsearch">${'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'}<input id="gq" placeholder="Search templates…" value="${gs.q}" aria-label="Search templates"></label>
+  <div class="gsort" role="group" aria-label="Sort"><button data-s="new" class="${gs.sort==='new'?'on':''}">Newest</button><button data-s="free" class="${gs.sort==='free'?'on':''}">Free first</button><button data-s="az" class="${gs.sort==='az'?'on':''}">A–Z</button></div></div>
+  <div class="gchips" id="gchips">${P.sub.map(c=>`<button data-c="${c}" class="${gs.sub===c?'on':''}">${c==='all'?'All':c==='ecommerce'?'E-commerce':c==='saas'?'SaaS':c==='ai'?'AI':c}</button>`).join('')}</div>
+  <div class="gcount" id="gcnt"></div><div class="ggrid" id="ggrid"></div><div class="gmore" id="gmore"></div></div></div>`;
+ const FEAT=HERO3.map(k=>DATA.find(d=>d.k===k)).filter(Boolean);const fg=document.getElementById('fgrid');fg.innerHTML=FEAT.map(gcard).join('');hydrate(fg);
+ document.getElementById('fall').onclick=e=>{e.preventDefault();document.getElementById('gpanel').scrollIntoView({behavior:'smooth'})};
+ document.getElementById('gq').oninput=e=>{gs.q=e.target.value.toLowerCase().trim();gs.shown=18;gfill()};
+ document.getElementById('gchips').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#gchips .on').forEach(x=>x.classList.remove('on'));b.classList.add('on');gs.sub=b.dataset.c;gs.shown=18;gfill()};
+ document.querySelector('.gsort').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('.gsort .on').forEach(x=>x.classList.remove('on'));b.classList.add('on');gs.sort=b.dataset.s;gfill()};gfill()}
+function gfill(){let L=DATA.filter(d=>d.kind==='prompt');if(gs.sub!=='all')L=L.filter(d=>d.tags.includes(gs.sub));
+ if(gs.q)L=L.filter(d=>(d.t+' '+d.c+' '+d.desc+' '+d.tags.join(' ')).toLowerCase().includes(gs.q));
+ const media=d=>(d.vid?2:d.img?1:0);L=[...L].sort(gs.sort==='az'?(a,b)=>a.t.localeCompare(b.t):gs.sort==='free'?(a,b)=>(b.free-a.free)||(b.order-a.order):(a,b)=>(!!a.ext-!!b.ext)||(!!media(b)-!!media(a))||(b.order-a.order));
+ const g=document.getElementById('ggrid');g.innerHTML=L.slice(0,gs.shown).map(gcard).join('')||'<div class="empty" style="grid-column:1/-1">No templates match. Try another category.</div>';
+ document.getElementById('gcnt').textContent=`${L.length} template${L.length===1?'':'s'}`;
+ document.getElementById('gmore').innerHTML=L.length>gs.shown?`<button class="btn g" id="glm">Load more (${L.length-gs.shown})</button>`:'';
+ const lm=document.getElementById('glm');if(lm)lm.onclick=()=>{gs.shown+=18;gfill()};hydrate(g)}
+function fill(kind){let L=DATA.filter(d=>kind==='free'?d.free:d.kind===kind);
+ if(kind==='skill'&&st.sub==='all'&&!st.q)L=L.filter(d=>!d.ext);
+ if(st.sub!=='all')L=L.filter(d=>kind==='free'?d.kind===st.sub:d.tags.includes(st.sub));
+ if(st.q)L=L.filter(d=>(d.t+' '+d.c+' '+d.desc+' '+d.tags.join(' ')).toLowerCase().includes(st.q));
+ const TOPFREE=['staticfm','d_obsidian','vprompt','casestudy','gate'],tf=d=>{const i=TOPFREE.indexOf(d.k);return kind==='free'&&i>-1?i:99};
+ L=[...L].sort(st.sort==='az'?(a,b)=>a.t.localeCompare(b.t):st.sort==='free'?(a,b)=>(b.free-a.free)||(b.order-a.order):(a,b)=>(tf(a)-tf(b))||(!!a.ext-!!b.ext)||(b.order-a.order));
+ const g=document.getElementById('grid');g.innerHTML=L.slice(0,st.shown).map(card).join('')||'<div class="empty">No matches. Try another filter, or <a href="#/free" style="text-decoration:underline">browse free items</a>.</div>';
+ document.getElementById('cnt').textContent=`Showing ${Math.min(st.shown,L.length)} of ${L.length}`;
+ document.getElementById('more').innerHTML=L.length>st.shown?`<button class="btn g" id="lm">Load more (${L.length-st.shown})</button>`:'';
+ const lm=document.getElementById('lm');if(lm)lm.onclick=()=>{st.shown+=12;fill(kind)};hydrate(g)}
+
+function item(k){const d=DATA.find(x=>x.k===k);if(!d){app.innerHTML='<div class="wrap empty">Item not found. <a href="#/">Go home</a></div>';return}
+ const ok=canAccess(d),back=d.kind==='prompt'?'prompts':d.kind==='deck'?'decks':'skills';
+ const inc=d.ext?'Made and maintained by its original author ('+(d.lic||'MIT')+' license). Motif features it with credit; not affiliated.':d.kind==='prompt'?'Copy-paste prompt (text) · swap the [BRACKETS] · works with Lovable, Bolt, v0, Cursor and Claude · your AI tool builds the site, so results vary':'SKILL.md + LICENSE.txt'+(d.k==='taste'?' + palette & font-pairing libraries':d.k==='audit'?' + UX laws cheat sheet':d.sample?(d.k==='d_clearview'?' + complete 8-slide sample deck (HTML, prints to PDF)':' + complete 10-slide sample deck (HTML, prints to PDF)'):'')+' · works in the Claude app, Claude Code, Cursor and Codex · <a href="#/guide" style="text-decoration:underline">how to install</a>';
+ let body='';if(d.kind==='prompt')body=ok?`<pre>${esc(d.prompt)}</pre>`:`<div class="lock"><pre>${esc(d.prompt)}…</pre><div class="ul"><button class="btn w" data-act="unlock">Unlock with Pro</button></div></div>`;
+ const act=d.ext?`<a class="btn w" href="${d.ext}" target="_blank" rel="noopener">Get it on GitHub ↗</a>${d.site?`<a class="btn g" href="${d.site}" target="_blank" rel="noopener">Visit site ↗</a>`:''}`:ok?(d.kind==='prompt'?`<button class="btn w" data-act="copy" data-k="${d.k}">${ICON.copy} Copy prompt</button>`:`<a class="btn w" href="${d.zip}" download data-act="dl" data-k="${d.k}">${ICON.dl} Download skill</a>`):`<button class="btn w" data-act="unlock">${ICON.crown} Get with Pro</button>`;
+ const rel=DATA.filter(x=>x!==d&&x.kind===d.kind).sort((a,b)=>b.tags.filter(t=>d.tags.includes(t)).length-a.tags.filter(t=>d.tags.includes(t)).length).slice(0,3);
+ app.innerHTML=`<div class="page wrap"><a class="back" href="#/${back}">← ${PAGES[d.kind].title}</a>
+ <div class="detail"><div class="thumb" data-i="${DATA.indexOf(d)}"></div><div class="side"><div class="tags">${[kindLabel[d.kind],...d.tags].map(t=>`<span>${t}</span>`).join('')}</div>
+ <h1>${d.t}</h1><div class="c">${d.c}</div><p class="d">${d.desc}</p>${body}<div style="display:flex;gap:10px;flex-wrap:wrap">${act}${d.sample?`<a class="btn g" href="${d.sample}" target="_blank" rel="noopener">▶ ${d.samplelabel||'View live sample deck'}</a>`:''}</div>
+ ${d.artprompt?`<div class="inc"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b>${d.artprompt.startsWith('VIDEO')?'🎬 Video &amp; image prompt':'🎨 Hero image prompt'} · free</b><button class="btn g sm" data-act="copyart" data-k="${d.k}">${ICON.copy.replace(/22/g,'15')} Copy</button></div><pre style="max-height:220px">${esc(d.artprompt)}</pre><div class="count" style="margin-top:8px">Paste into Gemini, ChatGPT, Midjourney (images) or Veo, Runway, Kling (video).</div></div>`:''}<div class="inc"><b>What's included</b><br>${inc}</div></div></div>
+ <div class="sh"><h2>More like <em>this</em></h2><a href="#/${back}">View all →</a></div><div class="grid three">${rel.map(card).join('')}</div></div>`;
+ hydrate(app)}
+
+function pricing(){app.innerHTML=`<div class="page wrap"><div class="ph" style="text-align:center"><div class="eb">Pricing</div><h1 style="text-align:center">Simple, <em>honest</em> pricing.</h1><p style="margin:0 auto">One plan unlocks every skill, deck style and prompt, including everything we release next.</p></div>
+ <div class="plans"><div class="plan"><div style="color:var(--mut)">Free</div><div class="amt">$0</div><div style="color:var(--mut)">No account needed</div><ul><li>${count('free')} free items</li><li>Community free picks</li><li>New free items as we release them</li></ul><a class="btn g" href="#/free">Browse free</a></div>
+ <div class="plan hot"><span class="rb">MOST POPULAR</span><div style="color:var(--mut)">Pro · yearly</div><div class="amt">$49<small> /yr</small></div><div style="color:var(--mut)">One payment · 12 months · no auto-renew</div><ul><li>All ${OWN()} Motif skills, decks &amp; prompts</li><li>New drops added to your link</li><li>Bonus video loops &amp; demo pages</li><li>Commercial license</li></ul><button class="btn w" data-act="buy" data-plan="pro">Go Pro</button></div>
+ <div class="plan"><div style="color:var(--mut)">Founding lifetime</div><div class="amt">$99</div><div style="color:var(--mut)">One payment. Price rises with the library.</div><ul><li>Everything in Pro, forever</li><li>Vote on upcoming drops</li><li>Early access</li></ul><button class="btn g" data-act="buy" data-plan="life">Get lifetime</button></div></div>
+ <div class="pay"><span>PayPal</span><span>Debit or credit card</span><span>Secure checkout on PayPal</span></div>
+ <section class="wyg" aria-labelledby="wyg-h"><div class="eb">What you get</div><h2 id="wyg-h">Exactly what's in the Pro download</h2>
+ <div class="wyg-grid">
+  <div><b>${own('skill')} Agent Skills</b><p>Install-ready SKILL.md folders for UX audits, design systems, AI art direction, motion and more. Works in the Claude app, Claude Code, Cursor and Codex.</p></div>
+  <div><b>${own('deck')} deck styles</b><p>Skills that make Claude build presentations in a set visual style. Two include complete sample decks.</p></div>
+  <div><b>${own('prompt')} website prompts</b><p>Detailed design briefs you paste into Lovable, v0, Bolt, Cursor or Claude. Your AI tool builds the site, so results vary by tool.</p></div>
+  <div><b>Bonus files</b><p>5 hero video loops, 2 working demo pages (Lattice, Softwork) and the image-prompt guide for recreating the hero art.</p></div>
+ </div>
+ <p class="wyg-note">Not included: finished website code for every template (the previews show what each prompt aims for), and the community picks, which are free on GitHub. <a href="#/guide">See how to use everything →</a></p></section>
+ <div class="tip"><div><b style="font-size:18px">Just want to say thanks?</b><p class="count">Tips keep the free drops coming.</p></div><a class="btn g" href="#" data-act="tip">☕ Buy me a coffee</a></div>
+ <div style="max-width:780px;margin:50px auto 0"><h2 style="font-size:30px;letter-spacing:-.03em;margin-bottom:10px">Questions</h2>
+ <details><summary>How do I get my Pro files after paying?</summary><p>We email a private download link for the full Pro library to your PayPal email within 24 hours (usually much sooner). The same link always holds the latest version, so new drops are included.</p></details><details><summary>Lost your download link?</summary><p>No problem. <a href="#/contact/order" style="text-decoration:underline">Contact us</a> with the email you used on PayPal and we'll resend it.</p></details>
+ <details><summary>How do I install the skills?</summary><p>See the <a href="#/guide" style="text-decoration:underline">step-by-step guide</a> for the Claude app, Claude Code, Cursor and Codex.</p></details><details><summary>What's the difference between a skill and a prompt?</summary><p>A prompt is copy-paste text for builders like Lovable or Bolt. A skill is a folder (SKILL.md + references) your agent installs and reuses.</p></details>
+ <details><summary>Can I use outputs for client work?</summary><p>Yes. Pro and Lifetime include a commercial license for anything you make. Reselling the skills or prompts themselves isn't allowed.</p></details>
+ <details><summary>Does it auto-renew?</summary><p>No. Pro is a single $49 payment for 12 months of access. We email you before it ends so you can renew if you want to. Nothing is charged automatically.</p></details></div></div>`}
+
+function thanks(k){const p=PLANS[k]||{name:'your purchase'};const isPro=k==='pro'||k==='life';
+ const steps=isPro?[['1','Check your email','We send a private download link to your <b>PayPal email</b> within 24 hours, usually much sooner. Look in spam or Promotions if you don\'t see it.'],
+  ['2','Download &amp; unzip','You get the full Pro library: every skill, deck style and website prompt, plus bonus video loops and the image-prompt guide.'],
+  ['3','Install &amp; use','Skills go into the Claude app, Claude Code, Cursor or Codex. Prompts get pasted into Lovable, v0, Bolt, Cursor or Claude. <a href="#/guide" style="text-decoration:underline;color:var(--tx)">Open the step-by-step guide →</a>']]:
+  [['1','Thank you','Your tip keeps the free drops coming. A receipt is on its way from PayPal.']];
+ app.innerHTML=`<div class="page wrap thx"><div class="thx-top"><div class="eb">Payment received</div><h1>Thank you!</h1>
+ <p class="sub">Your payment for <b>${p.name}</b> went through on PayPal.${k==='pro'?' Your Pro access lasts 12 months from today and doesn\'t renew automatically. We\'ll email you before it ends.':k==='life'?' Lifetime means every current and future drop, forever.':''}</p></div>
+ <ol class="thx-steps">${steps.map(s=>`<li><span>${s[0]}</span><div><b>${s[1]}</b><p>${s[2]}</p></div></li>`).join('')}</ol>
+ <div class="thx-help"><div><b>Didn't get your link within 24 hours?</b><p>Send us your PayPal email and we'll resend it right away.</p></div><a class="btn w" href="#/contact/order">Get help with my download</a></div>
+ <div style="display:flex;gap:10px;justify-content:center;margin-top:26px"><a class="btn g" href="#/free">Try the free items now</a><a class="btn g" href="#/">Back home</a></div></div>`}
+const LEGAL={license:["License","<p>Buying Pro gives you a personal, non-transferable license to use every Motif skill, deck style and prompt in your own and your clients' projects, including commercial work.</p><p>You own what you make with them. You may not resell, share, re-upload or redistribute the skills or prompts themselves, whether free or paid. Free items may be shared by linking to Motif's page.</p>"],
+ refunds:["Refunds","<p>Because files are delivered instantly, purchases are generally final. If something doesn't work as described, email us within 14 days and we'll fix it or refund you.</p><p>Pro is a one-time payment for 12 months of access and does not renew automatically. Lifetime is a one-time payment. This doesn't limit any rights you have under local consumer law.</p>"],
+ terms:["Terms","<p>By using Motif you agree to the License and Refund policy. Skills and prompts are provided as-is; always review AI-generated output before using it. We may update the library and these terms; material changes will be emailed to customers.</p>"],
+ delivery:["Getting your files","<p><b>Free items:</b> download instantly from each item page. No account needed.</p><p><b>Pro and Lifetime:</b> after you pay on PayPal, we email a private download link for the full Pro library to your PayPal email address within 24 hours (usually much sooner). The same link always holds the latest bundle, so new drops are included.</p><p><b>Didn't get it, or lost your link?</b> Check spam, then <a href=\"#/contact/order\" style=\"text-decoration:underline\">contact us</a> with the email you used on PayPal and we'll resend it.</p><p><b>Pro (1 year)</b> lasts 12 months and doesn't renew automatically; we email you before it ends. <b>Lifetime</b> never expires.</p>"],
+ privacy:["Privacy","<p>We collect only what we need: your email (for delivery and receipts), your purchase record from our payment provider, and basic anonymous analytics. We never sell your data. Email us to delete your data at any time.</p>"]};
+function legal(k){const L=LEGAL[k]||LEGAL.terms;app.innerHTML=`<div class="page wrap" style="max-width:760px"><div class="ph"><div class="eb">Legal</div><h1>${L[0]}</h1></div><div class="d" style="color:var(--tx2);line-height:1.7;font-size:17px;display:grid;gap:14px">${L[1]}</div><p class="count" style="margin-top:30px">Plain-language summary. Last updated October 2026.</p></div>`}
+function contact(k){setTimeout(()=>{if(k==='order'){const s=document.querySelector('select[name=topic]');if(s){s.value='Order / download help';const m=document.querySelector('textarea[name=message]');if(m&&!m.value)m.placeholder='The email you used on PayPal, and your plan (Pro 1 year or Lifetime)';(document.querySelector('input[name=name]')||{}).focus?.()}}},0);app.innerHTML=`<div class="page wrap" style="max-width:720px"><div class="ph"><div class="eb">Contact</div><h1>Say hello</h1><p>Questions about a skill, a purchase, custom work or collaborations. We reply within 1–2 business days.</p></div>
+ <form id="cf" class="glassf" novalidate>
+  <label>Name<input name="name" required autocomplete="name" placeholder="Your name"></label>
+  <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@email.com"></label>
+  <label>Topic<select name="topic"><option>Question about a skill or prompt</option><option>Order / download help</option><option>Custom work or collaboration</option><option>Feedback or idea for a new drop</option><option>Something else</option></select></label>
+  <label>Message<textarea name="message" required rows="6" placeholder="How can we help?"></textarea></label>
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+  <div id="cerr" role="alert" style="color:#f87171;font-size:14px;min-height:20px"></div>
+  <button class="btn w" id="csend" type="submit">Send message</button>
+ </form><div id="cok" hidden style="text-align:center;padding:40px 0"><div style="font-size:48px">✉️</div><h2 style="font-size:34px;letter-spacing:-.03em;margin:10px 0">Message sent</h2><p class="count" style="font-size:16px">Thanks! We'll get back to you soon at the email you provided.</p><a class="btn g" href="#/" style="margin-top:20px">Back home</a></div></div>`;
+ const f=document.getElementById('cf');f.onsubmit=async e=>{e.preventDefault();const err=document.getElementById('cerr'),b=document.getElementById('csend');const fd=new FormData(f);
+  if(fd.get('_honey'))return;const name=fd.get('name').trim(),email=fd.get('email').trim(),msg=fd.get('message').trim();
+  if(!name){err.textContent='Please add your name.';f.name.focus();return}if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Enter a valid email so we can reply, e.g. name@email.com.';f.email.focus();return}if(msg.length<5){err.textContent='Please write a short message.';f.message.focus();return}
+  err.textContent='';b.disabled=true;b.textContent='Sending…';
+  try{const r=await fetch('https://formsubmit.co/ajax/'+CONTACT_TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name,email,topic:fd.get('topic'),message:msg,_subject:'Motif contact: '+fd.get('topic'),_replyto:email,_template:'table',_captcha:'false'})});
+   if(!r.ok)throw 0;f.hidden=true;document.getElementById('cok').hidden=false}
+  catch(_){b.disabled=false;b.textContent='Send message';err.innerHTML='Couldn\'t send right now. Please try again, or email <a style="text-decoration:underline" href="mailto:'+CONTACT_TO+'">'+CONTACT_TO+'</a>.'}}}
+function account(){if(!SIGNIN_ENABLED){legal('delivery');return}if(!S.user){app.innerHTML=`<div class="page wrap"><div class="ph"><h1>Your library</h1><p>Sign in to see your downloads and plan.</p><div style="margin-top:20px"><button class="gbtn" data-act="login">${ICON.g} Sign in with Google</button></div></div></div>`;return}
+ const mine=DATA.filter(canAccess);
+ app.innerHTML=`<div class="page wrap"><div class="ph"><div class="eb">Account</div><h1>Hi, ${S.user.name.split(' ')[0]}</h1><p>${S.user.email} · Plan: <b style="color:var(--tx)">${S.pro?'Pro':'Free'}</b> ${S.pro?'<span class="pro">PRO</span>':''}</p>
+ <div style="display:flex;gap:10px;margin-top:20px"><a class="btn w" href="#/pricing">Upgrade to Pro</a><button class="btn g" data-act="logout">Sign out</button></div></div>
+ <div class="sh"><h2>Unlocked for you <em>(${mine.length})</em></h2></div><div class="grid three">${mine.map(card).join('')}</div></div>`;hydrate(app)}
+
+/* ---------- router ---------- */
+/* ---------- How to use guide ---------- */
+const GUIDE_TABS=[['claude','Claude app'],['code','Claude Code'],['cursor','Cursor'],['codex','Codex'],['prompts','Website prompts'],['decks','Deck styles']];
+const GUIDE={
+claude:`<h3>Claude app (claude.ai, desktop and mobile)</h3><ol>
+<li>Unzip the Pro download and open the <code>claude-app-zips</code> folder. Every skill is already zipped for you.</li>
+<li>In Claude, open <b>Customize → Skills</b>, click <b>+</b>, then <b>Create skill → Upload a skill</b>.</li>
+<li>Upload one skill zip (for example <code>taste-layer.zip</code>). Repeat for any others you want.</li>
+<li>Make sure the skill is switched on. Claude uses it automatically when your request matches, or you can ask for it by name: <i>“Use the taste-layer skill to redesign this page.”</i></li></ol>
+<p class="gnote">Skills need a Claude plan with skills and code execution turned on. Details: <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" target="_blank" rel="noopener">Use skills in Claude ↗</a></p>`,
+code:`<h3>Claude Code</h3><ol>
+<li>Copy a skill folder from <code>skills/</code> into <code>~/.claude/skills/</code> to use it in every project, or into <code>.claude/skills/</code> inside one project.</li>
+<li>Keep the folder name as it is. Each folder has a <code>SKILL.md</code> inside.</li>
+<li>Start a new Claude Code session. Ask normally (<i>“audit this signup form”</i>) or name the skill.</li></ol>
+<pre>cp -R skills/ux-heuristic-audit ~/.claude/skills/</pre>`,
+cursor:`<h3>Cursor</h3><ol>
+<li>Copy a skill folder into <code>~/.cursor/skills/</code> (all projects) or <code>.cursor/skills/</code> in your project.</li>
+<li>In Agent chat, type <b>/</b> and pick the skill, or just describe the task and Cursor loads it when it fits.</li></ol>
+<pre>cp -R skills/dashboard-architect ~/.cursor/skills/</pre>
+<p class="gnote">More: <a href="https://cursor.com/docs/skills" target="_blank" rel="noopener">Cursor Agent Skills ↗</a></p>`,
+codex:`<h3>OpenAI Codex</h3><ol>
+<li>Copy a skill folder into <code>~/.codex/skills/</code>.</li>
+<li>Restart Codex. It reads each skill's name and description, and loads the full instructions when your task matches.</li></ol>
+<pre>cp -R skills/microcopy-writer ~/.codex/skills/</pre>
+<p class="gnote">More: <a href="https://developers.openai.com/codex/skills" target="_blank" rel="noopener">Codex Agent Skills ↗</a></p>`,
+prompts:`<h3>Website prompts</h3><ol>
+<li>Open <code>motif-website-prompts.md</code> (or copy a free prompt straight from its page on this site).</li>
+<li>Replace every <b>[BRACKET]</b> with your own brand name, copy and details.</li>
+<li>Paste the whole prompt into <b>Lovable, v0, Bolt, Cursor or Claude</b> and let it build. Then iterate: <i>“make the hero calmer”, “add a pricing section”.</i></li>
+<li>For templates with art (Jade Pavilion, Meridian, Concord…), use the <b>HERO IMAGE PROMPT</b> or <b>VIDEO PROMPT</b> at the end of the prompt in Gemini or another image/video tool, then drop the file into your site. The bonus loops in <code>assets/</code> are ready to use.</li></ol>
+<p class="gnote">A prompt is a detailed design brief, not finished code. Your AI tool builds the site, so results vary by tool and model. The previews on Motif show what each prompt aims for. Tip: on the home page, type what you're building and use <b>Copy with my idea</b>.</p>`,
+decks:`<h3>Deck styles</h3><ol>
+<li>Install a <code>deck-…</code> skill like any other skill (Claude app, Claude Code, Cursor or Codex).</li>
+<li>Ask: <i>“Make a 10-slide investor deck about [topic] using the Obsidian deck style.”</i></li>
+<li>You get an HTML deck you can present in the browser or print to PDF. Obsidian and Clearview include full sample decks in their <code>examples/</code> folder.</li></ol>`};
+function guide(k){const tab=GUIDE[k]?k:'claude';
+ app.innerHTML=`<div class="page wrap guide"><div class="ph"><div class="eb">How to use</div><h1>Use Motif in your tools</h1><p>Install skills in the Claude app, Claude Code, Cursor or Codex, and turn website prompts into real sites with Lovable, v0, Bolt, Cursor or Claude.</p></div>
+ <div class="gbox"><b>What's in your Pro download</b><pre>motif-pro/   (inside Motif-Pro-Bundle.zip)
+├─ START-HERE.md              ← read this first
+├─ skills/                    ${own('skill')+own('deck')} skill folders (SKILL.md inside)
+├─ claude-app-zips/           the same skills, one zip each for the Claude app
+├─ motif-website-prompts.md   all ${own('prompt')} website prompts
+├─ assets/                    5 hero video loops
+├─ examples/                  2 working demo pages
+├─ THUMBNAIL-IMAGE-PROMPTS.md image prompts for the hero art
+└─ LICENSE.txt</pre></div>
+ <div class="gtabs" role="tablist">${GUIDE_TABS.map(([v,l])=>`<a role="tab" href="#/guide/${v}" aria-selected="${v===tab}" class="${v===tab?'on':''}">${l}</a>`).join('')}</div>
+ <div class="gpanel2" role="tabpanel">${GUIDE[tab]}</div>
+ <div class="thx-help" style="margin-top:28px"><div><b>Stuck?</b><p>Tell us which tool you're using and what happened. We'll help you get it working.</p></div><a class="btn g" href="#/contact/order">Contact us</a></div></div>`;window.scrollTo(0,0)}
+function route(){const h=location.hash.replace(/^#\/?/,'');const [p,k]=h.split('/');closeM();
+ if(['skills','decks','prompts','free'].includes(p)&&st.page!==p){st.page=p;st.sub='all';st.q='';st.shown=12}
+ document.querySelectorAll('#links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+p));
+ const it=p==='item'&&DATA.find(x=>x.k===k);
+ ({skills:()=>library('skill'),decks:()=>library('deck'),prompts:gallery,free:()=>library('free'),item:()=>item(k),thanks:()=>thanks(k),legal:()=>legal(k),contact:()=>contact(k),guide:()=>guide(k),pricing,account}[p]||home)();
+ renderAuth();scrollTo(0,0)}
+addEventListener('hashchange',route);
+
+/* ---------- actions ---------- */
+function say(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1800)}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(!a)return;const act=a.dataset.act;const d=DATA.find(x=>x.k===a.dataset.k);
+ if(act==='quick'){e.preventDefault();e.stopPropagation();if(d.ext){open(d.ext,'_blank','noopener');return}if(!canAccess(d)){location.hash='#/item/'+d.k;return}if(d.kind==='prompt'){try{navigator.clipboard.writeText(d.prompt)}catch(_){}say('Prompt copied ✓')}else{const l=document.createElement('a');l.href=d.zip;l.download='';l.click();say('Downloading '+d.t)}return}
+ if(act==='copyart'){try{navigator.clipboard.writeText(d.artprompt)}catch(_){}say('Image prompt copied ✓');return}
+ if(act==='copy'){try{navigator.clipboard.writeText(d.prompt)}catch(_){}say('Prompt copied ✓');return}
+ if(act==='dl'){say('Downloading '+d.t);return}
+ if(act==='login'){login();return}
+ if(act==='dologin'){S.user={name:'Guest Preview',email:''};closeM();renderAuth();say('Preview sign-in ✓');route();return}
+ if(act==='logout'){S.user=null;S.pro=false;location.hash='#/';route();return}
+ if(act==='unlock'){location.hash='#/pricing';return}
+ if(act==='tipamt'){setTip(+a.dataset.v);return}
+ if(act==='buy'){e.preventDefault();checkout(a.dataset.plan);return}
+  if(act==='tip'){e.preventDefault();if(BMC_URL){open(BMC_URL,'_blank','noopener');return}tipModal();return}
+ if(act==='manage'){modal('<h3>Manage billing</h3><p>In production this opens the customer portal to update payment or cancel.</p><button class="btn w" style="margin-top:18px" onclick="closeM()">Close</button>');return}
+});
+
+function rotator(){const r=document.getElementById('rot');if(!r)return;const rs=[...r.children];let i=0;rs[0].classList.add('on');const f=()=>r.style.width=rs[i].offsetWidth+'px';f();
+ clearInterval(window._rt);window._rt=setInterval(()=>{if(!document.body.contains(r))return clearInterval(window._rt);const p=i;rs[p].classList.replace('on','out');setTimeout(()=>rs[p].classList.remove('out'),700);i=(i+1)%rs.length;rs[i].classList.add('on');f()},2400)}
+
+['skill','deck','prompt','free'].forEach(k=>document.getElementById('n-'+k).textContent=count(k));
+route();
+
+/* ---------- Motif mark: eyes follow cursor, random blinks ---------- */
+(function(){let P=null,last=0;addEventListener('pointermove',e=>{P={x:e.clientX,y:e.clientY};last=performance.now()},{passive:true});
+ const rm=matchMedia('(prefers-reduced-motion: reduce)');
+ function loop(t){document.querySelectorAll('.mk').forEach((m,i)=>{const r=m.getBoundingClientRect();if(!r.width)return;const cx=r.left+r.width/2,cy=r.top+r.height*.48;
+   let dx,dy;if(!P||t-last>3500){dx=Math.cos(t/1500+i)*60;dy=Math.sin(t/1200+i)*30}else{dx=P.x-cx;dy=P.y-cy}
+   const d=Math.hypot(dx,dy)||1,k=Math.min(1,d/160);m.querySelectorAll('.ey b').forEach(p=>p.style.transform=`translate(calc(-50% + ${dx/d*k*26}%),calc(-50% + ${dy/d*k*28}%))`)});
+   if(!rm.matches)requestAnimationFrame(loop)}
+ requestAnimationFrame(loop);
+ (function bl(){setTimeout(()=>{if(!rm.matches)document.querySelectorAll('.mk').forEach(m=>{m.classList.add('blink');setTimeout(()=>m.classList.remove('blink'),120)});bl()},3000+Math.random()*3500)})();
+})();
+
+function applyTheme(m){document.documentElement.dataset.theme=m;try{localStorage.setItem('motif-theme',m)}catch(e){}document.querySelectorAll('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===m)))}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-theme-set]');if(b)applyTheme(b.dataset.themeSet)});
+applyTheme(document.documentElement.dataset.theme||'dark');
+
+/* ---------- finder: match the visitor's idea to templates, skills and decks (runs in the browser, no AI server) ---------- */
+const SYN={saas:['saas','landing','ai','app','dashboard','startup'],startup:['saas','landing'],app:['app','saas','mobile'],mobile:['app','mobile'],calendar:['saas','dashboard','productivity','scheduling'],
+ shop:['ecommerce','store','shop'],store:['ecommerce','store'],ecommerce:['ecommerce'],fashion:['fashion','ecommerce','editorial'],jewelry:['jewelry','ecommerce','luxury'],ring:['jewelry'],
+ portfolio:['portfolio','studio','agency'],agency:['portfolio','agency','studio'],studio:['portfolio','studio'],resume:['resume','portfolio','career'],cv:['resume','career'],
+ restaurant:['restaurant','food'],food:['food','restaurant'],coffee:['coffee','ecommerce'],travel:['travel','luxury'],hotel:['travel','luxury'],game:['game','hero'],gaming:['game'],
+ music:['music','radio','podcast'],radio:['radio','music'],podcast:['podcast'],event:['event','landing'],conference:['event'],ski:['event','sport'],sport:['sport','event'],fitness:['fitness','health'],
+ health:['health','wellness'],wellness:['wellness','calm'],meditation:['calm','wellness'],ai:['ai','saas','agent'],agent:['ai','agent'],robot:['ai','robot'],data:['ai','saas','dashboard','analytics'],
+ analytics:['analytics','dashboard','saas'],dashboard:['dashboard','saas','systems'],docs:['docs'],blog:['editorial','blog'],magazine:['editorial','magazine'],real:['realestate'],estate:['realestate'],
+ property:['realestate'],apartment:['realestate'],phone:['ecommerce','hero','product'],product:['product','ecommerce','hero','landing'],hardware:['product','hero'],glasses:['product'],
+ video:['video','motion'],animation:['motion','video','animated'],animated:['motion','animated'],motion:['motion'],'3d':['3d','motion'],cute:['playful','mascot'],mascot:['mascot','brand'],
+ logo:['brand','mascot'],brand:['brand'],deck:['deck'],slides:['deck'],presentation:['deck'],pitch:['deck','pitch'],ux:['ux'],audit:['ux','audit'],research:['research','ux'],
+ accessibility:['a11y'],a11y:['a11y'],form:['forms','ux'],onboarding:['onboarding','ux'],copy:['copy','marketing'],marketing:['marketing','landing'],seo:['marketing'],
+ dark:['dark'],minimal:['minimal'],playful:['playful','cute'],cinematic:['cinematic','video','hero'],print:['print','riso'],optics:['science','product'],lab:['science']};
+const STOP=new Set('a an the for of to and with that my our your i we me build create make page site website landing helps help plan team teams design new want need like some about online simple modern clean'.split(' '));
+const WEAK=new Set('store shop app platform launch launches tool company business service services'.split(' '));
+function askTerms(q){const w=q.toLowerCase().replace(/[^a-z0-9\s-]/g,' ').split(/\s+/).filter(x=>x&&!STOP.has(x));const m=new Map();const put=(k,v)=>m.set(k,Math.max(m.get(k)||0,v));w.forEach(x=>{const b=x.length>4?x.replace(/(es|s)$/,''):x;put(b,WEAK.has(x)||WEAK.has(b)?.35:1);(SYN[x]||SYN[b]||[]).forEach(y=>put(y,.55))});return [...m]}
+let ASKDOC=null;const askDoc=d=>(d.t+' '+d.c+' '+d.tags.join(' ')+' '+(d.desc||'')).toLowerCase();
+function idf(w){if(!ASKDOC)ASKDOC=DATA.map(askDoc);let n=0;for(const x of ASKDOC)if(x.includes(w))n++;return Math.log(1+DATA.length/(1+n))}
+function askScore(d,terms){const T=(d.t+' '+d.c).toLowerCase(),G=d.tags.join(' ').toLowerCase(),X=(d.desc||'').toLowerCase();let s=0;const hit=[];
+ terms.forEach(([w,k0])=>{const k=k0*idf(w);let p=0;if(T.includes(w))p+=4;if(G.includes(w))p+=3;if(X.includes(w))p+=1.2;if(p){s+=p*k;if(k0===1&&!hit.includes(w))hit.push(w)}});
+ if(s>0){if(d.vid)s+=.6;else if(d.img)s+=.3;if(d.ext)s-=.5}return [s,hit]}
+const askState={t:'all',s:new Set()};
+function askRun(q){const out=document.getElementById('askout');if(!out)return;const styles=[...askState.s];const terms=askTerms(q+' '+styles.join(' '));
+ let L=DATA.filter(d=>askState.t==='all'||d.kind===askState.t).map(d=>{const [s,h]=askScore(d,terms);return {d,s,h}}).filter(x=>x.s>0).sort((a,b)=>((b.h.length>0)-(a.h.length>0))||(b.s-a.s)).slice(0,6);
+ const esc=x=>x.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const kindName={prompt:'website prompt',skill:'skill',deck:'deck style'};
+ let msg;if(!L.length){msg=`I couldn't find a close match for that yet. Try a few words about the type of site (shop, portfolio, SaaS, event) or a style (dark, playful, cinematic). You can also <a href="#/prompts" style="text-decoration:underline">browse all prompts</a>.`}
+ else{const b=L[0].d;msg=`Here ${L.length>1?'are':'is'} ${L.length} match${L.length>1?'es':''}. Best fit: <b>${esc(b.t)}</b>, a ${kindName[b.kind]} (${esc(b.c)}).${b.kind==='prompt'?' Use <b>Copy with my idea</b> to get a prompt that already knows your project.':''}`}
+ out.innerHTML=`<div class="chat"><div class="bub me">${esc(q||styles.join(', '))}</div><div class="bub mo"><span class="mk" aria-hidden="true"><i class="ey l"><b></b></i><i class="ey r"><b></b></i></span><div>${msg}</div></div></div>`+
+ (L.length?`<div class="ggrid askres">${L.map(({d,h})=>{const ok=canAccess(d);const why=h.length?'Matches: '+h.slice(0,4).join(', '):'';
+  const acts=d.ext?`<a class="btn g" href="${d.ext}" target="_blank" rel="noopener">Get it on GitHub ↗</a>`:d.kind==='prompt'?(ok?`<button class="btn w" type="button" data-askcopy="${d.k}">Copy with my idea</button>`:`<a class="btn g" href="#/item/${d.k}">Unlock with Pro</a>`):`<a class="btn w" href="#/item/${d.k}">${ok?'Get it':'View'}</a>`;
+  return `<div>${gcard(d)}<div class="askact">${acts}<span class="why">${why}</span></div></div>`}).join('')}</div>`:'');
+ out.dataset.q=q;hydrate(out)}
+function askPrompt(d,q){return `MY PROJECT: ${q.trim()||'(describe your project here)'}\n\nBuild this using the template below. Replace every [BRACKETED] placeholder with names, copy and details that fit my project. Keep the layout, style rules, motion and accessibility notes. Where the template names a different industry, adapt it to mine.\n\n---\n\n${d.prompt}`}
+document.addEventListener('submit',e=>{if(e.target.id!=='ask')return;e.preventDefault();const q=document.getElementById('askq').value.trim();if(!q&&!askState.s.size){document.getElementById('askq').focus();return}askRun(q)});
+document.addEventListener('keydown',e=>{if(e.target.id==='askq'&&e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('ask').requestSubmit()}});
+document.addEventListener('click',e=>{const t=e.target.closest('[data-askt]');if(t){document.querySelectorAll('[data-askt]').forEach(b=>{b.classList.toggle('on',b===t);b.setAttribute('aria-pressed',String(b===t))});askState.t=t.dataset.askt;const q=document.getElementById('askq').value.trim();if(q||askState.s.size)askRun(q);return}
+ const s=e.target.closest('[data-asks]');if(s){const v=s.dataset.asks,on=!askState.s.has(v);on?askState.s.add(v):askState.s.delete(v);s.classList.toggle('on',on);s.setAttribute('aria-pressed',String(on));const q=document.getElementById('askq').value.trim();if(q||askState.s.size)askRun(q);return}
+ const c=e.target.closest('[data-askcopy]');if(c){const d=DATA.find(x=>x.k===c.dataset.askcopy);const q=(document.getElementById('askout')||{}).dataset?.q||'';try{navigator.clipboard.writeText(askPrompt(d,q))}catch(_){}say('Prompt with your idea copied ✓')}});
+</script>
+</body>
+</html>

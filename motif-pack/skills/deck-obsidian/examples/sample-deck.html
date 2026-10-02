@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northstar: Series A · Obsidian deck by Motif</title>
+<style>
+:root{--bg:#050507;--ink:#F5F5F7;--mut:#8E8E96;--line:rgba(255,255,255,.08);--glass:rgba(255,255,255,.04);--a1:#7C5CFF;--a2:#22D3EE;
+  --grad:linear-gradient(90deg,var(--a1),var(--a2));--display:"Inter Tight","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden}
+body{font-family:var(--display);color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+section{position:absolute;inset:0;padding:110px 140px;background:var(--bg);overflow:hidden;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s}
+section::before{content:"";position:absolute;inset:0;background:radial-gradient(1200px 600px at 50% -10%,rgba(124,92,255,.18),transparent);pointer-events:none}
+section.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+section.on .up{animation:up .9s cubic-bezier(.2,.8,.2,1) both}
+section.on .up:nth-child(2){animation-delay:.06s}section.on .up:nth-child(3){animation-delay:.12s}section.on .up:nth-child(4){animation-delay:.18s}section.on .up:nth-child(5){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.k{font:500 18px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+h1,h2{font-weight:650;letter-spacing:-.045em;line-height:1}
+h1{font-size:128px}h2{font-size:84px;max-width:1500px}
+.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p,.body{font-size:30px;line-height:1.45;color:var(--mut)}
+.glow{position:absolute;border-radius:50%;filter:blur(110px);opacity:.42;background:var(--grad);animation:br 6s ease-in-out infinite alternate;pointer-events:none}
+@keyframes br{to{opacity:.28;transform:scale(1.08)}}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:28px;backdrop-filter:blur(20px)}
+.foot{position:absolute;left:140px;right:140px;bottom:56px;display:flex;justify-content:space-between;font:400 16px var(--mono);color:#5b5b63;letter-spacing:.08em}
+.num{font-size:340px;font-weight:700;letter-spacing:-.06em;line-height:.85}
+.src{font:400 16px var(--mono);color:#5b5b63;margin-top:30px}
+.row{display:grid;gap:28px}
+.ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.3);margin-bottom:26px}
+table{width:100%;border-collapse:collapse;font-size:28px}
+th,td{padding:24px 26px;text-align:left;border-bottom:1px solid var(--line)}
+th{font:500 17px var(--mono);letter-spacing:.12em;color:var(--mut);text-transform:uppercase}
+td.us,th.us{background:rgba(124,92,255,.08)}
+.y{color:#34D399}.n{color:#5b5b63}
+.chip{position:absolute;padding:18px 24px;border-radius:18px;font-size:22px;font-weight:600;background:rgba(20,20,26,.8);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+/* chrome */
+#ui{position:fixed;right:18px;bottom:14px;display:flex;gap:8px;align-items:center;font:12px var(--mono);color:#777;z-index:9}
+#ui button{background:#15151a;border:1px solid #2a2a30;color:#bbb;border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
+#prog{position:fixed;left:0;top:0;height:3px;background:var(--grad);transition:width .4s;z-index:9}
+.notes{display:none}
+body.shownotes #notes{display:block}
+#notes{display:none;position:fixed;left:18px;bottom:14px;max-width:520px;background:#111;border:1px solid #2a2a30;color:#ccc;border-radius:10px;padding:12px 14px;font:14px/1.5 -apple-system,sans-serif;z-index:9}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:var(--bg)}
+  #stage{position:static;transform:none!important;width:1920px;height:auto}
+  section{position:relative;opacity:1!important;visibility:visible!important;page-break-after:always;height:1080px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section .up{animation:none!important}#ui,#prog,#notes{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="stage">
+
+<!-- 1 · Title -->
+<section>
+  <div class="glow" style="width:900px;height:500px;left:420px;top:260px"></div>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:center">
+    <div class="k up">Northstar · Series A · October 2026</div>
+    <h1 class="up" style="margin:34px 0 36px">Scheduling that<br><span class="g">runs itself.</span></h1>
+    <p class="up">Dana Okafor, Co-founder &amp; CEO</p>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>01 / 10</span></div>
+  <aside class="notes">Open with the one-line vision. Pause after "runs itself".</aside>
+</section>
+
+<!-- 2 · Statement -->
+<section>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:center">
+    <div class="k up">01 — The problem</div>
+    <h2 class="up" style="margin-top:34px;font-size:96px">Clinics lose <span class="g">one in five</span> appointments to no-shows and phone-tag.</h2>
+    <p class="up" style="margin-top:40px;max-width:1100px">Front desks spend 11 hours a week rescheduling by hand, and every empty slot is revenue that never comes back.</p>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>02 / 10</span></div>
+  <aside class="notes">Make it human: a front-desk manager with three phones ringing.</aside>
+</section>
+
+<!-- 3 · Big number -->
+<section>
+  <div class="glow" style="width:760px;height:520px;left:60px;top:240px"></div>
+  <div style="position:relative;height:100%;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:80px">
+    <div><div class="k up">02 — Market</div><div class="num g up" style="margin-top:30px" data-count="41">$41B</div></div>
+    <div><p class="up" style="font-size:40px;color:var(--ink);line-height:1.3">lost each year in the US to missed outpatient appointments.</p><div class="src up">Source: illustrative figure for this sample deck</div></div>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>03 / 10</span></div>
+</section>
+
+<!-- 4 · Three pillars -->
+<section>
+  <div class="k up">03 — Solution</div>
+  <h2 class="up" style="margin:26px 0 70px">An AI front desk that <span class="g">fills every slot.</span></h2>
+  <div class="row up" style="grid-template-columns:repeat(3,1fr)">
+    <div class="glass" style="padding:44px"><div class="ic"><svg width="28" height="28" fill="none" stroke="#B9A8FF" stroke-width="1.5"><rect x="4" y="6" width="20" height="18" rx="3"/><path d="M4 11h20M9 3v5M19 3v5"/></svg></div><b style="font-size:34px;letter-spacing:-.02em">Books itself</b><p style="margin-top:14px;font-size:26px">Patients book, move and confirm by text, 24/7.</p></div>
+    <div class="glass" style="padding:44px"><div class="ic"><svg width="28" height="28" fill="none" stroke="#B9A8FF" stroke-width="1.5"><path d="M4 20l6-6 5 5 9-11"/><path d="M18 8h6v6"/></svg></div><b style="font-size:34px;letter-spacing:-.02em">Predicts no-shows</b><p style="margin-top:14px;font-size:26px">Flags risky slots and double-books safely.</p></div>
+    <div class="glass" style="padding:44px"><div class="ic"><svg width="28" height="28" fill="none" stroke="#B9A8FF" stroke-width="1.5"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 3"/></svg></div><b style="font-size:34px;letter-spacing:-.02em">Refills the gaps</b><p style="margin-top:14px;font-size:26px">Offers freed slots to the waitlist in seconds.</p></div>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>04 / 10</span></div>
+</section>
+
+<!-- 5 · Chart -->
+<section>
+  <div class="k up">04 — Traction</div>
+  <h2 class="up" style="margin:26px 0 50px">Revenue grew <span class="g">6×</span> in twelve months.</h2>
+  <div class="up" style="display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:end">
+    <svg viewBox="0 0 900 460" style="width:100%;height:520px">
+      <defs><linearGradient id="gb" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#22D3EE"/></linearGradient></defs>
+      <g stroke="rgba(255,255,255,.07)"><line x1="0" y1="100" x2="900" y2="100"/><line x1="0" y1="220" x2="900" y2="220"/><line x1="0" y1="340" x2="900" y2="340"/></g>
+      <g fill="#26262c">
+        <rect x="20" y="390" width="120" height="60" rx="10"/><rect x="190" y="360" width="120" height="90" rx="10"/><rect x="360" y="300" width="120" height="150" rx="10"/><rect x="530" y="220" width="120" height="230" rx="10"/></g>
+      <rect x="700" y="80" width="120" height="370" rx="10" fill="url(#gb)"/>
+      <g font-family="JetBrains Mono,monospace" font-size="20" fill="#8E8E96" text-anchor="middle">
+        <text x="80" y="375">$0.2M</text><text x="250" y="345">$0.3M</text><text x="420" y="285">$0.5M</text><text x="590" y="205">$0.8M</text>
+        <text x="760" y="62" fill="#F5F5F7" font-size="24" font-weight="700">$1.2M</text></g>
+    </svg>
+    <div class="glass" style="padding:40px"><div class="k">ARR by quarter</div><p style="margin-top:18px;color:var(--ink);font-size:32px;line-height:1.35">140 clinics live. Net revenue retention of 138%. Churn under 1% per month.</p></div>
+  </div>
+  <div class="foot"><span>NORTHSTAR · illustrative data</span><span>05 / 10</span></div>
+</section>
+
+<!-- 6 · Product -->
+<section>
+  <div class="glow" style="width:700px;height:500px;left:1000px;top:300px"></div>
+  <div style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:60px;height:100%;align-items:center">
+    <div><div class="k up">05 — Product</div><h2 class="up" style="margin-top:26px;font-size:80px">One inbox for every <span class="g">booking.</span></h2><p class="up" style="margin-top:30px">Staff see what the AI handled, and step in with one tap when it matters.</p></div>
+    <div style="position:relative;height:760px" class="up">
+      <div style="position:absolute;left:120px;top:20px;width:400px;height:760px;border-radius:64px;background:#000;border:2px solid #2a2a30;padding:16px;box-shadow:0 60px 120px rgba(0,0,0,.6)">
+        <div style="height:100%;border-radius:50px;background:#0e0e13;padding:56px 26px;font-size:20px">
+          <div style="font-weight:700;font-size:28px;margin-bottom:22px">Today</div>
+          <div class="glass" style="padding:18px;border-radius:18px;margin-bottom:14px">✓ 9:00 Rescheduled by AI<div style="color:var(--mut);font-size:17px">Patient asked for later slot</div></div>
+          <div class="glass" style="padding:18px;border-radius:18px;margin-bottom:14px;border-color:rgba(124,92,255,.5)">⚡ 10:30 Waitlist filled<div style="color:var(--mut);font-size:17px">Offered to 3 patients, 1st accepted</div></div>
+          <div class="glass" style="padding:18px;border-radius:18px">⚠ 14:00 High no-show risk<div style="color:var(--mut);font-size:17px">Reminder sent · awaiting reply</div></div>
+        </div></div>
+      <div class="chip" style="left:-30px;top:200px">−62% no-shows</div>
+      <div class="chip" style="right:0;top:520px">11 hrs saved / week</div>
+    </div>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>06 / 10</span></div>
+</section>
+
+<!-- 7 · Roadmap -->
+<section>
+  <div class="k up">06 — Roadmap</div>
+  <h2 class="up" style="margin:26px 0 120px">From clinics to <span class="g">every appointment.</span></h2>
+  <div class="up" style="position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:30px">
+    <div style="position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)"></div>
+    <div style="position:absolute;left:0;width:37%;top:15px;height:2px;background:var(--grad)"></div>
+    <div><i style="display:block;width:32px;height:32px;border-radius:50%;background:#7C5CFF;box-shadow:0 0 0 8px rgba(124,92,255,.15)"></i><div class="k" style="margin:30px 0 10px">2025 · Done</div><b style="font-size:32px">Clinic pilot</b><p style="font-size:24px;margin-top:8px">12 clinics, SMS booking</p></div>
+    <div><i style="display:block;width:32px;height:32px;border-radius:50%;background:var(--grad);box-shadow:0 0 40px rgba(34,211,238,.7)"></i><div class="k" style="margin:30px 0 10px;color:#22D3EE">2026 · Now</div><b style="font-size:32px">No-show AI</b><p style="font-size:24px;margin-top:8px">Prediction + waitlist refill</p></div>
+    <div><i style="display:block;width:32px;height:32px;border-radius:50%;border:2px solid #3a3a42"></i><div class="k" style="margin:30px 0 10px">2027 H1</div><b style="font-size:32px">Voice agent</b><p style="font-size:24px;margin-top:8px">Answers the phone, too</p></div>
+    <div><i style="display:block;width:32px;height:32px;border-radius:50%;border:2px solid #3a3a42"></i><div class="k" style="margin:30px 0 10px">2027 H2</div><b style="font-size:32px">New verticals</b><p style="font-size:24px;margin-top:8px">Dental, vet, wellness</p></div>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>07 / 10</span></div>
+</section>
+
+<!-- 8 · Comparison -->
+<section>
+  <div class="k up">07 — Why we win</div>
+  <h2 class="up" style="margin:26px 0 56px">The only one that <span class="g">acts</span>, not just reminds.</h2>
+  <table class="up">
+    <tr><th></th><th class="us">Northstar</th><th>Reminder tools</th><th>Legacy PM systems</th></tr>
+    <tr><td>Two-way booking by text</td><td class="us y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
+    <tr><td>Predicts no-shows</td><td class="us y">✓</td><td class="n">—</td><td class="n">—</td></tr>
+    <tr><td>Auto-refills from waitlist</td><td class="us y">✓</td><td class="n">—</td><td class="n">—</td></tr>
+    <tr><td>Setup time</td><td class="us" style="color:var(--ink);font-weight:600">1 day</td><td>1 week</td><td>3 months</td></tr>
+  </table>
+  <div class="foot"><span>NORTHSTAR</span><span>08 / 10</span></div>
+</section>
+
+<!-- 9 · Quote -->
+<section>
+  <div class="glow" style="width:800px;height:400px;left:560px;top:380px"></div>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1500px">
+    <div class="up" style="font-size:200px;line-height:.6;font-weight:700" ><span class="g">“</span></div>
+    <h2 class="up" style="font-size:76px;font-weight:500;letter-spacing:-.035em;line-height:1.1">We stopped playing phone-tag. Our schedule is full and my team goes home on time.</h2>
+    <div class="up" style="display:flex;gap:20px;align-items:center;margin-top:48px"><i style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#F7B32B,#F2613F);display:block"></i><div><b style="font-size:26px">Maria Chen</b><div class="k" style="margin-top:6px">Practice manager · Bayview Clinic</div></div></div>
+  </div>
+  <div class="foot"><span>NORTHSTAR · sample testimonial</span><span>09 / 10</span></div>
+</section>
+
+<!-- 10 · The ask -->
+<section>
+  <div class="glow" style="width:900px;height:520px;left:500px;top:120px"></div>
+  <div style="position:relative">
+    <div class="k up">08 — The ask</div>
+    <h2 class="up" style="margin:26px 0 60px;font-size:104px">Raising <span class="g">$12M</span> Series A</h2>
+    <div class="row up" style="grid-template-columns:repeat(3,1fr)">
+      <div class="glass" style="padding:40px"><div class="num g" style="font-size:96px">50%</div><p style="margin-top:12px;color:var(--ink)">Voice agent &amp; AI</p></div>
+      <div class="glass" style="padding:40px"><div class="num g" style="font-size:96px">35%</div><p style="margin-top:12px;color:var(--ink)">Go-to-market</p></div>
+      <div class="glass" style="padding:40px"><div class="num g" style="font-size:96px">15%</div><p style="margin-top:12px;color:var(--ink)">Compliance &amp; ops</p></div>
+    </div>
+    <p class="up" style="margin-top:56px">dana@northstar.example · Let's talk this week.</p>
+  </div>
+  <div class="foot"><span>NORTHSTAR</span><span>10 / 10</span></div>
+</section>
+
+</div>
+<div id="notes"></div>
+<div id="ui"><button id="pv" aria-label="Previous slide">←</button><span id="ct">1 / 10</span><button id="nx" aria-label="Next slide">→</button><button id="fs">F · Fullscreen</button><button id="nt">N · Notes</button><button onclick="print()">Save PDF</button></div>
+<script>
+const S=[...document.querySelectorAll('section')],stage=document.getElementById('stage');let i=Math.max(0,Math.min(S.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${-960*s}px,${-540*s}px) scale(${s})`}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((x,k)=>x.classList.toggle('on',k===i));document.getElementById('ct').textContent=`${i+1} / ${S.length}`;
+ document.getElementById('prog').style.width=((i+1)/S.length*100)+'%';history.replaceState(null,'','#'+(i+1));const n2=S[i].querySelector('.notes');document.getElementById('notes').textContent=n2?n2.textContent:'(no notes)'}
+addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}
+ if(e.key==='Home')go(0);if(e.key==='End')go(S.length-1);if(e.key.toLowerCase()==='f')fsT();if(e.key.toLowerCase()==='n')document.body.classList.toggle('shownotes')});
+stage.addEventListener('click',e=>go(e.clientX>innerWidth/2?i+1:i-1));
+function fsT(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+document.getElementById('pv').onclick=()=>go(i-1);document.getElementById('nx').onclick=()=>go(i+1);document.getElementById('fs').onclick=fsT;document.getElementById('nt').onclick=()=>document.body.classList.toggle('shownotes');
+addEventListener('resize',fit);fit();go(i);
+</script>
+</body>
+</html>

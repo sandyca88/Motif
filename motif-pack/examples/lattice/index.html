@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lattice: particle sphere hero demo · Motif</title>
+<meta name="description" content="Live demo of Motif prompt #64: a canvas particle sphere with data signals and orbit rings.">
+<style>
+:root{--bg:#050608;--ink:#f2f4f7;--mut:#8b929c;--cy:#39c6ff;--line:#1a1e24}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Outfit","Urbanist","Avenir Next",-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.grain{position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:5;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.hero{position:relative;min-height:100vh;overflow:hidden}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+nav{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:28px 5.5vw}
+.logo{font-family:"Snell Roundhand","Brush Script MT",cursive;font-size:26px;color:#dfe3e8}
+.links{display:flex;gap:44px;font-size:13px;letter-spacing:.08em;color:#9ba2ac}.links a{color:inherit;text-decoration:none}.links a:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:99px;border:1px solid #23272e;color:#fff;text-decoration:none;font-weight:600;font-size:15px;background:transparent;transition:border-color .25s,background .25s}
+.pill:hover{border-color:#3a4652;background:rgba(255,255,255,.03)}
+.pill:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+.copy{position:relative;z-index:3;padding:18vh 5.5vw 0;max-width:780px}
+.k{font-size:13px;letter-spacing:.2em;color:var(--cy);font-weight:600}.k::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cy);margin-right:11px;vertical-align:2px;box-shadow:0 0 10px var(--cy)}
+h1{margin:26px 0 30px;font-size:clamp(52px,6.6vw,108px);font-weight:500;letter-spacing:-.045em;line-height:1.02;background:linear-gradient(180deg,#fff 30%,#9aa1ab);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{font-size:19px;line-height:1.65;color:var(--mut);max-width:470px}
+.cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+.pri{position:relative;padding-left:62px;background:linear-gradient(90deg,#0b0e12,#0f2a33);border-color:#1f4652;overflow:hidden}
+.pri::before{content:"";position:absolute;left:4px;top:4px;bottom:4px;width:46px;border-radius:99px;background:linear-gradient(90deg,#1b2129,#0d1116);box-shadow:inset 0 0 0 1px #2a3440,0 0 18px rgba(57,198,255,.25);transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.pri:hover::before{transform:translateX(6px)}
+.hint{position:absolute;z-index:3;left:5.5vw;bottom:28px;font-size:12px;letter-spacing:.16em;color:#5b616b}
+section{position:relative;z-index:3;padding:120px 5.5vw;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.card{padding:28px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.015);transition:border-color .3s,transform .3s}
+.card:hover{border-color:rgba(57,198,255,.5);transform:translateY(-3px)}
+.card b{display:block;font-size:19px;font-weight:600;margin-bottom:8px}.card span{color:var(--mut);line-height:1.55}
+h2{font-size:44px;font-weight:500;letter-spacing:-.035em}
+.stats{display:flex;gap:60px;flex-wrap:wrap}.stats div{font-variant-numeric:tabular-nums}.stats b{display:block;font-size:56px;font-weight:500;letter-spacing:-.04em}.stats span{color:var(--mut)}
+footer{position:relative;z-index:3;padding:40px 5.5vw;color:#5b616b;font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:900px){.links{display:none}.grid{grid-template-columns:1fr}.copy{padding-top:10vh}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<header class="hero">
+  <canvas id="c" aria-hidden="true"></canvas>
+  <nav><span class="logo">Lattice</span><div class="links"><a href="#how">PLATFORM</a><a href="#features">FEATURES</a><a href="#numbers">PRICING</a><a href="#numbers">DOCS</a></div><a class="pill" href="#features">Join the beta</a></nav>
+  <div class="copy">
+    <div class="k">SIGNAL PLATFORM</div>
+    <h1>See the shape<br>of your data.</h1>
+    <p>Lattice maps every event, agent and customer into one living graph, so your team can see patterns before they become problems.</p>
+    <div class="cta"><a class="pill pri" href="#how">Start exploring</a><a class="pill" href="#features">Read the docs</a></div>
+  </div>
+  <div class="hint">MOVE YOUR CURSOR · MOTIF PROMPT #64 DEMO</div>
+</header>
+<section id="how"><h2>Connect. Map. Act.</h2>
+  <div class="grid"><div class="card"><b>Connect</b><span>Stream events from your apps, warehouse and agents in minutes.</span></div><div class="card"><b>Map</b><span>Every signal becomes a node in one living graph.</span></div><div class="card"><b>Act</b><span>Spot anomalies early and trigger the right workflow automatically.</span></div></div></section>
+<section id="features"><h2>Built for teams who ship.</h2>
+  <div class="grid"><div class="card"><b>Live graph</b><span>Sub-second updates across billions of events.</span></div><div class="card"><b>Anomaly alerts</b><span>Learned baselines, not brittle thresholds.</span></div><div class="card"><b>Private by design</b><span>Your data stays in your region and your cloud.</span></div></div></section>
+<section id="numbers"><div class="stats"><div><b>2.4B</b><span>events / day</span></div><div><b>38 ms</b><span>p95 latency</span></div><div><b>99.99%</b><span>uptime</span></div></div></section>
+<footer>Demo for Motif prompt #64 "Lattice". Original design. Product name and copy are placeholders.</footer>
+<script>
+(() => {
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const N = 1400, GA = Math.PI * (3 - Math.sqrt(5));
+const P = [];
+for (let i = 0; i < N; i++) { const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = GA * i; P.push([Math.cos(t) * r, y, Math.sin(t) * r]); }
+const NODES = P.filter((_, i) => i % 35 === 0).map((p, i) => ({ p, ph: i * 1.7 }));
+const RINGS = [{ a: 1.55, b: .42, tilt: -.26, sp: .05 }, { a: 1.35, b: 1.1, tilt: .5, sp: -.03 }, { a: 1.75, b: 1.25, tilt: -.1, sp: .02 }];
+let W, H, DPR, cx, cy, R, signals = [], last = 0, spawn = 0, mx = 0, my = 0, tx = 0, ty = 0, vis = true, rot = 0;
+function size() { DPR = Math.min(2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const wide = W > 900; cx = wide ? W * .72 : W * .5; cy = wide ? H * .56 : H * .72; R = Math.min(H * .34, W * (wide ? .26 : .42)); }
+function rotP(p, ry, rx) { let [x, y, z] = p; const c = Math.cos(ry), s = Math.sin(ry); [x, z] = [x * c - z * s, x * s + z * c];
+  const c2 = Math.cos(rx), s2 = Math.sin(rx); [y, z] = [y * c2 - z * s2, y * s2 + z * c2]; return [x, y, z]; }
+function proj(v) { const f = 600 / (600 - v[2] * R * .9); return [cx + v[0] * R * f, cy + v[1] * R * f, v[2]]; }
+function slerp(a, b, t) { const d = Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2])), om = Math.acos(d) || 1e-4, s = Math.sin(om);
+  const k1 = Math.sin((1 - t) * om) / s, k2 = Math.sin(t * om) / s; return [a[0] * k1 + b[0] * k2, a[1] * k1 + b[1] * k2, a[2] * k1 + b[2] * k2]; }
+function frame(ts) {
+  const dt = Math.min(.05, (ts - last) / 1000 || 0); last = ts;
+  if (!reduce) rot += dt * .06;
+  tx += (mx - tx) * .06; ty += (my - ty) * .06;
+  const ry = rot + tx * .17, rx = .31 + ty * .17;
+  ctx.clearRect(0, 0, W, H);
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.25); g.addColorStop(0, 'rgba(40,170,210,.22)'); g.addColorStop(1, 'rgba(40,170,210,0)');
+  ctx.fillStyle = g; ctx.fillRect(cx - R * 1.4, cy - R * 1.4, R * 2.8, R * 2.8);
+  // rings
+  RINGS.forEach((r, i) => { const a = r.tilt + (reduce ? 0 : ts / 1000 * r.sp);
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(a); ctx.strokeStyle = `rgba(95,227,255,${.16 + i * .05})`; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.ellipse(0, 0, R * r.a, R * r.b, 0, 0, Math.PI * 2); ctx.stroke();
+    if (i === 2) { const t = ts / 1000 * .25; ctx.fillStyle = '#7fe9ff'; ctx.shadowColor = '#39c6ff'; ctx.shadowBlur = 14; ctx.beginPath(); ctx.arc(Math.cos(t) * R * r.a, Math.sin(t) * R * r.b, 4, 0, 7); ctx.fill(); }
+    ctx.restore(); });
+  // particles
+  ctx.shadowBlur = 0;
+  for (const p of P) { const v = proj(rotP(p, ry, rx)), d = (v[2] + 1) / 2; ctx.fillStyle = `rgba(110,200,255,${.12 + d * .78})`;
+    const s = .6 + d * 1.8; ctx.fillRect(v[0] - s / 2, v[1] - s / 2, s, s); }
+  // nodes
+  for (const n of NODES) { const v = proj(rotP(n.p, ry, rx)), d = (v[2] + 1) / 2; if (d < .35) continue;
+    const pulse = reduce ? 1 : .75 + .25 * Math.sin(ts / 600 + n.ph);
+    ctx.fillStyle = `rgba(95,227,255,${d * .9})`; ctx.shadowColor = '#39c6ff'; ctx.shadowBlur = 12 * d;
+    ctx.beginPath(); ctx.arc(v[0], v[1], (2 + d * 3) * pulse, 0, 7); ctx.fill(); }
+  ctx.shadowBlur = 0;
+  // signals
+  if (!reduce) { spawn -= dt; if (spawn <= 0 && signals.length < 6) { spawn = .8; const a = NODES[Math.random() * NODES.length | 0].p, b = NODES[Math.random() * NODES.length | 0].p; if (a !== b) signals.push({ a, b, t: 0 }); } }
+  signals = signals.filter(s => s.t < 1.25);
+  for (const s of signals) { s.t += dt / 1.6; ctx.lineCap = 'round';
+    for (let k = 0; k < 14; k++) { const tt = Math.min(1, s.t) - k * .02; if (tt < 0) break; const e = tt < .5 ? 2 * tt * tt : 1 - Math.pow(-2 * tt + 2, 2) / 2;
+      const v = proj(rotP(slerp(s.a, s.b, e), ry, rx)); const fade = (1 - k / 14) * (s.t > 1 ? 1 - (s.t - 1) * 4 : 1);
+      ctx.fillStyle = `rgba(160,240,255,${Math.max(0, fade) * ((v[2] + 1) / 2 * .8 + .2)})`; ctx.beginPath(); ctx.arc(v[0], v[1], 1.6 - k * .08, 0, 7); ctx.fill(); } }
+  if (vis && !reduce) requestAnimationFrame(frame);
+}
+addEventListener('pointermove', e => { mx = (e.clientX / innerWidth - .5) * 2; my = (e.clientY / innerHeight - .5) * 2; }, { passive: true });
+addEventListener('resize', size);
+new IntersectionObserver(([e]) => { const was = vis; vis = e.isIntersecting && !document.hidden; if (vis && !was) requestAnimationFrame(frame); }).observe(cv);
+document.addEventListener('visibilitychange', () => { const was = vis; vis = !document.hidden; if (vis && !was) requestAnimationFrame(frame); });
+size(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

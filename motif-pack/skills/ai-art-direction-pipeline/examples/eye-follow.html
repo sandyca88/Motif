@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Softwork Studio: eye-tracking demo · Motif</title>
+<meta name="description" content="A soft, playful studio page where the mascot's eyes follow your cursor.">
+<style>
+:root{--ink:#2A1A14;--bg:#F5E0CF;--chip:#FFF6F0;--accent:#E9785F}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Nunito","Avenir Next","Segoe UI",-apple-system,sans-serif;overflow:hidden}
+.stage{position:fixed;inset:0;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;user-select:none;-webkit-user-drag:none}
+.pupil{position:absolute;border-radius:50%;background:radial-gradient(circle at 38% 34%,#5a4038 0 12%,#1d1411 13% 100%);box-shadow:inset 0 -3px 6px rgba(0,0,0,.35);transform:translate(-50%,-50%);will-change:left,top}
+.pupil::after{content:"";position:absolute;width:28%;height:28%;left:22%;top:18%;border-radius:50%;background:#fff;opacity:.95}
+.lid{position:absolute;border-radius:50%;background:linear-gradient(#F8C9AE,#EBB194);box-shadow:inset 0 -2px 4px rgba(120,60,30,.25);transform:translate(-50%,-50%) scaleY(0);transform-origin:50% 0;transition:transform .09s ease-in}
+.blink .lid{transform:translate(-50%,-50%) scaleY(1)}
+header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:28px 40px}
+.mark{font-weight:900;font-size:30px;letter-spacing:-.03em;display:flex;gap:10px;align-items:center}
+.mark i{width:28px;height:28px;border-radius:50% 50% 45% 45%;background:var(--accent);box-shadow:inset -4px -5px 8px rgba(0,0,0,.18)}
+nav{display:flex;gap:6px;background:rgba(255,246,240,.75);backdrop-filter:blur(10px);padding:6px;border-radius:99px}
+nav span{padding:10px 16px;border-radius:99px;font-weight:700;font-size:15px}
+nav span:last-child{background:var(--ink);color:#fff}
+.copy{position:absolute;z-index:2;left:40px;bottom:44px;max-width:380px}
+.tag{display:inline-block;background:var(--chip);padding:7px 13px;border-radius:99px;font-size:14px;font-weight:700}
+h1{font-size:clamp(34px,4vw,58px);line-height:1.02;letter-spacing:-.035em;font-weight:900;margin:14px 0 12px}
+p{font-size:17px;line-height:1.5;opacity:.85}
+.right{position:absolute;z-index:2;right:40px;bottom:44px;text-align:right}
+.right b{display:block;font-size:22px;font-weight:900;letter-spacing:-.02em}
+.right small{display:block;margin-top:6px;font-size:13px;opacity:.75}
+.hint{position:absolute;z-index:2;left:50%;bottom:18px;transform:translateX(-50%);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+@media(max-width:1000px){.copy,.right{background:rgba(255,246,240,.86);backdrop-filter:blur(8px);padding:18px 20px;border-radius:22px}.copy{left:20px;right:auto;bottom:150px;max-width:420px}.right{left:20px;right:auto;text-align:left;bottom:24px}.right b{font-size:18px}.hint{display:none}}
+@media(max-width:760px){header{padding:20px}nav span:not(:last-child){display:none}.copy{right:20px}h1{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage" aria-hidden="true">
+  <img id="art" src="bunny.webp" alt="">
+</div>
+<header><div class="mark"><i></i>softwork</div><nav><span>Work</span><span>Studio</span><span>Lab</span><span>Say hi</span></nav></header>
+<div class="copy"><span class="tag">got a soft spot?</span><h1>small ideas,<br>big hugs.</h1><p>A tiny studio making brands people want to hold on to.</p></div>
+<div class="right"><b>let's make something<br>you'll want to hug*</b><small>*no actual hugging required.</small></div>
+<div class="hint">move your cursor · tap on mobile</div>
+<script>
+/* CONFIG — replace bunny.webp with your character and paste the values printed by scripts/find_eyes.py
+   (SRC = original image size; EYES = centers/radii in that same pixel space). */
+const SRC = { w: 2752, h: 1536 };
+const EYES = [ { x: 1182, y: 741, rx: 85, ry: 92 }, { x: 1568, y: 741, rx: 85, ry: 92 } ];
+const PUPIL_RATIO = 0.46;   // pupil diameter relative to eye width
+const TRAVEL = 0.42;        // how far the pupil can move from center (fraction of eye radius)
+const stage = document.getElementById('stage'), img = document.getElementById('art');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const parts = EYES.map(() => {
+  const p = document.createElement('div'); p.className = 'pupil';
+  const l = document.createElement('div'); l.className = 'lid';
+  stage.append(p, l); return { p, l, cx: 0, cy: 0 };
+});
+let target = null, cur = EYES.map(() => ({ x: 0, y: 0 })), geo = [], idleT = 0, lastMove = 0;
+
+function layout() {
+  const W = stage.clientWidth, H = stage.clientHeight;
+  const s = Math.max(W / SRC.w, H / SRC.h);                       // object-fit: cover
+  const ox = (W - SRC.w * s) / 2, oy = (H - SRC.h * s) / 2;
+  geo = EYES.map(e => ({ x: ox + e.x * s, y: oy + e.y * s, rx: e.rx * s, ry: e.ry * s }));
+  geo.forEach((g, i) => {
+    const d = g.rx * 2 * PUPIL_RATIO;
+    Object.assign(parts[i].p.style, { width: d + 'px', height: d + 'px' });
+    Object.assign(parts[i].l.style, { width: g.rx * 2.06 + 'px', height: g.ry * 2.06 + 'px', left: g.x + 'px', top: g.y - g.ry * 1.03 + 'px' });
+  });
+}
+function aim(i, tx, ty) {
+  const g = geo[i], dx = tx - g.x, dy = ty - g.y, dist = Math.hypot(dx, dy) || 1;
+  const k = Math.min(1, dist / (g.rx * 6));                         // closer cursor = smaller movement
+  return { x: (dx / dist) * g.rx * TRAVEL * k, y: (dy / dist) * g.ry * TRAVEL * k };
+}
+function frame(t) {
+  let goal;
+  if (target && t - lastMove < 4000) goal = target;
+  else {                                                             // idle: slow wander
+    idleT += 0.006; const g = geo[0] || { x: 0, y: 0 };
+    goal = { x: (geo[0].x + geo[1].x) / 2 + Math.cos(idleT) * 400, y: geo[0].y + Math.sin(idleT * 1.3) * 180 };
+  }
+  parts.forEach((pt, i) => {
+    const a = aim(i, goal.x, goal.y), c = cur[i], ease = reduce.matches ? 1 : 0.18;
+    c.x += (a.x - c.x) * ease; c.y += (a.y - c.y) * ease;
+    pt.p.style.left = geo[i].x + c.x + 'px'; pt.p.style.top = geo[i].y + c.y + 'px';
+  });
+  requestAnimationFrame(frame);
+}
+function onMove(e) { const pt = e.touches ? e.touches[0] : e; target = { x: pt.clientX, y: pt.clientY }; lastMove = performance.now(); }
+addEventListener('pointermove', onMove, { passive: true });
+addEventListener('touchstart', onMove, { passive: true });
+addEventListener('touchmove', onMove, { passive: true });
+addEventListener('resize', layout);
+function blink() {
+  if (!reduce.matches) { stage.classList.add('blink'); setTimeout(() => stage.classList.remove('blink'), 140); }
+  setTimeout(blink, 2600 + Math.random() * 3200);
+}
+(img.complete ? Promise.resolve() : new Promise(r => img.onload = r)).then(() => { layout(); requestAnimationFrame(frame); setTimeout(blink, 2200); });
+</script>
+</body>
+</html>
